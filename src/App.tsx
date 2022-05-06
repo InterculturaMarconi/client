@@ -3,10 +3,10 @@ import { Routes, Route } from 'react-router-dom';
 import { useMediaQuery } from '@mui/material';
 import { ThemeProvider } from '@mui/material/styles';
 
-import Home from './pages/Home';
+import Home from '@/pages/Home';
 
-import './css/index.css';
-import { getTheme, PaletteMode } from './theme';
+import '@/styles/index.css';
+import { getTheme, PaletteMode } from '@/theme';
 
 export const ColorTypeContext = React.createContext({ toggle: () => { } });
 
