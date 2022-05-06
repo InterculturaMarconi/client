@@ -8,7 +8,7 @@ import Home from './pages/Home';
 import './css/index.css';
 import { getTheme, PaletteMode } from './theme';
 
-const ColorTypeContext = React.createContext({ toggle: () => { } });
+export const ColorTypeContext = React.createContext({ toggle: () => { } });
 
 const App = () => {
   const [mode, setMode] = React.useState<PaletteMode>(
