@@ -41,5 +41,7 @@ module.exports = {
         'react/jsx-uses-react': 1,
         'react/jsx-uses-vars': 1,
         'react/jsx-indent-props': ['error', 4],
+        'implicit-arrow-linebreak': 'off',
+        'object-curly-newline': 'off',
     },
 };
