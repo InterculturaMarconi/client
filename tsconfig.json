@@ -17,15 +17,7 @@
         "jsx": "react-jsx",
         "baseUrl": "./src",
         "paths": {
-<<<<<<< HEAD
             "~/*": ["*"]
-=======
-            "@components/*": ["components/*"],
-            "@styles/*": ["styles/*"],
-            "@pages/*": ["pages/*"],
-            "@img/*": ["img/*"],
-            "@/*": ["*"],
->>>>>>> f8d23340f832dd81132192f515f5fb0ba27ec7a6
         }
     },
     "include": ["src"],
