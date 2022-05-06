@@ -1,18 +1,8 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
 
-import Home from './pages/Home';
-
-import './css/index.css';
-
-const App = () => {
-  return (
-  <Routes>
-    <Route path="/" element={<Home />} />
-  </Routes>
-  );
-}
+import App from './App'
 
 ReactDOM
   .createRoot(document.getElementById('root')!)
