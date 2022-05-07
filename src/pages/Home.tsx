@@ -3,6 +3,7 @@ import React from 'react';
 import Navbar from '~/components/Navbar';
 import Table from '~/components/Table';
 import Page from '~/components/Page';
+import Footer from '~/components/Footer';
 import TrePersoneMondo from '~/img/TrePersoneMondo.png';
 import { Box } from '@mui/system';
 import Typography from '@mui/material/Typography';
@@ -29,6 +30,7 @@ const Home: React.FC = () => (
             </Box>
         </Grid>
         <Table />
+        <Footer />
     </Page>
 );
 
