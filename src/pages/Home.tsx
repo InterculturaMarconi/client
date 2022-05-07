@@ -9,13 +9,10 @@ import { Box } from '@mui/system';
 import Typography from '@mui/material/Typography';
 import { Grid } from '@mui/material';
 
-
 const Home: React.FC = () => (
-    /* eslint-disable max-len */
-    /* eslint-disable import/no-extraneous-dependencies */
     <Page title="Home | InterculturaMarconi">
         <Navbar />
-        <Grid container spacing={1} alignItems="center" justify="left">
+        <Grid container spacing={1} alignItems="center" justifyContent="left">
             <img src={TrePersoneMondo} height={400} alt="" />
             <Box width={600}>
                 <Typography variant="h3" gutterBottom component="div">
