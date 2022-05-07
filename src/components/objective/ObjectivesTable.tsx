@@ -32,7 +32,10 @@ const grid: IObjectiveButton[][] = [
         { id: 15, icon: useImage('obbiettivi/15.jpg') },
         { id: 16, icon: useImage('obbiettivi/16.jpg') },
         { id: 17, icon: useImage('obbiettivi/17.jpg') },
-        { id: 18, icon: 'https://images.unric.org/it/wp-content/uploads/sites/3/2019/03/SDG_LOGO_IT_RGB-696x450.jpg' },
+        {
+            id: 18,
+            icon: 'https://images.unric.org/it/wp-content/uploads/sites/3/2019/03/SDG_LOGO_IT_RGB-696x450.jpg',
+        },
     ],
 ];
 

@@ -1,15 +1,15 @@
-import { Brightness4, Brightness7 } from '@mui/icons-material';
-import { IconButton, useTheme } from '@mui/material';
 import React from 'react';
+import { IconButton } from '@mui/material';
+import Brightness4 from '@mui/icons-material/Brightness4';
+import Brightness7 from '@mui/icons-material/Brightness7';
 import { usePaletteMode } from '~/hooks/Theme';
 
 const PaletteModeButton: React.FC = () => {
-    const { palette } = useTheme();
-    const { toggle } = usePaletteMode();
+    const { mode, toggle } = usePaletteMode();
 
     return (
         <IconButton onClick={toggle} color="inherit">
-            {palette.mode === 'dark' ? <Brightness7 /> : <Brightness4 />}
+            {mode === 'dark' ? <Brightness7 /> : <Brightness4 />}
         </IconButton>
     );
 };

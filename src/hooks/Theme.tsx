@@ -1,5 +1,6 @@
 import React from 'react';
 import { createTheme, PaletteMode, ThemeProvider, useMediaQuery } from '@mui/material';
+import { DocumentScannerTwoTone } from '@mui/icons-material';
 
 interface IPaletteModeContext {
     mode: PaletteMode;
@@ -17,32 +18,43 @@ const PaletteModeContext = React.createContext<IPaletteModeContext>({
  */
 export const usePaletteMode = () => React.useContext(PaletteModeContext);
 
-interface IPaletteModeProvider {
-    children: React.ReactNode;
-}
 /**
  * Checks whether the client prefers dark mode.
  * @returns {@code true} if the client prefers dark mode.
  */
 export const prefersDarkMode = (): boolean => useMediaQuery('(prefers-color-scheme: dark)');
 
-export const PaletteModeProvider: React.FC<IPaletteModeProvider> = ({ children }) => {
-    const darkMode = prefersDarkMode();
-    const [mode, setMode] = React.useState<PaletteMode>(darkMode ? 'dark' : 'light');
+interface IPaletteModeProvider {
+    children: React.ReactNode;
+}
 
-    const theme = React.useMemo(
-        () =>
-            createTheme({
+export const PaletteModeProvider: React.FC<IPaletteModeProvider> = ({ children }) => {
+    const darkmode = prefersDarkMode();
+    const [mode, setMode] = React.useState<PaletteMode>('light');
+
+    React.useEffect(() => {
+        const cached = localStorage.getItem('dark-mode');
+        if (cached) setMode(cached === 'true' ? 'dark' : 'light');
+        else setMode(darkmode ? 'dark' : 'light');
+    }, []);
+
+    const toggle = () =>
+        setMode(prev => {
+            localStorage.setItem('dark-mode', `${prev === 'light'}`);
+            return prev === 'light' ? 'dark' : 'light';
+        });
+
+    const { theme, value } = React.useMemo(
+        () => ({
+            theme: createTheme({
                 palette: {
                     mode,
                 },
             }),
+            value: { mode, toggle },
+        }),
         [mode],
     );
-
-    const toggle = () => setMode((prev) => (prev === 'light' ? 'dark' : 'light'));
-
-    const value = React.useMemo(() => ({ mode, toggle }), []);
 
     return (
         <PaletteModeContext.Provider value={value}>
