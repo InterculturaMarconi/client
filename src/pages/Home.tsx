@@ -1,16 +1,13 @@
 import React from 'react';
 
 import Navbar from '~/components/Navbar';
-import Table from '~/components/Table';
+import ObjectivesTable from '~/components/objective/ObjectivesTable';
 import Page from '~/components/Page';
 import Footer from '~/components/Footer';
 import TrePersoneMondo from '~/img/TrePersoneMondo.png';
 import { Box } from '@mui/system';
 import Typography from '@mui/material/Typography';
 import { Grid } from '@mui/material';
-import { useClass } from '~/hooks/Styles';
-
-import styles from '~/styles/Home.module.css';
 
 const Home: React.FC = () => (
     <Page title="Home | InterculturaMarconi">
@@ -32,10 +29,10 @@ const Home: React.FC = () => (
                 </Typography>
             </Box>
         </Grid>
-        <Box className={useClass(styles, 'table-box')}>
-            <Table />
+        <Box sx={{ marginY: '4em' }}>
+            <ObjectivesTable />
         </Box>
-        <Footer />
+        {/* <Footer /> */}
     </Page>
 );
 

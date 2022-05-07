@@ -1,7 +1,7 @@
 import React from 'react';
 import Grid from '@mui/material/Grid';
 
-import ObjectiveButton from '~/components/buttons/ObjectiveButton';
+import ObjectiveButton from '~/components/objective/ObjectiveButton';
 import { useImage } from '~/hooks/Image';
 
 interface IObjectiveButton {
@@ -32,16 +32,16 @@ const grid: IObjectiveButton[][] = [
         { id: 15, icon: useImage('obbiettivi/15.jpg') },
         { id: 16, icon: useImage('obbiettivi/16.jpg') },
         { id: 17, icon: useImage('obbiettivi/17.jpg') },
-        { id: 18, icon: '' },
+        { id: 18, icon: 'https://images.unric.org/it/wp-content/uploads/sites/3/2019/03/SDG_LOGO_IT_RGB-696x450.jpg' },
     ],
 ];
 
-const Table = () => (
-    <Grid container rowSpacing={2}>
-        {grid.map(line => (
-            <Grid container item spacing={1} justifyContent="center">
-                {line.map(({ id, icon }) => (
-                    <Grid item>
+const ObjectivesTable = () => (
+    <Grid container rowSpacing={3}>
+        {grid.map((line, i) => (
+            <Grid key={`row-${i}`} container item spacing={2} justifyContent="center">
+                {line.map(({ id, icon }, j) => (
+                    <Grid item key={`col-${j}`}>
                         <ObjectiveButton id={id} icon={icon} />
                     </Grid>
                 ))}
@@ -50,4 +50,4 @@ const Table = () => (
     </Grid>
 );
 
-export default Table;
+export default ObjectivesTable;
