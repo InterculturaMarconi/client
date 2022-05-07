@@ -1,0 +1,9 @@
+.ob-table {
+    /* @apply w-screen; */
+
+    border: 1px solid red;
+
+    @apply flex;
+    @apply items-center;
+    /* @apply justify-center; */
+}

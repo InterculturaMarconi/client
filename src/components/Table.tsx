@@ -1,5 +1,4 @@
 import React from 'react';
-import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 
 import ob1 from '~/img/obbiettivi/1.jpg';
@@ -20,7 +19,11 @@ import ob15 from '~/img/obbiettivi/15.jpg';
 import ob16 from '~/img/obbiettivi/16.jpg';
 import ob17 from '~/img/obbiettivi/17.jpg';
 // import ob18 from '~/img/obbiettivi/18.jpg';
+
+// import { useClass } from '~/hooks/Styles';
 import ObjectiveButton from '~/components/ObjectiveButton';
+
+// import styles from '~/styles/Table.module.css';
 
 interface IObjectiveButton {
     id: number;
@@ -55,19 +58,17 @@ const grid: IObjectiveButton[][] = [
 ];
 
 const Table = () => (
-    <Box sx={{ flexGrow: 1 }}>
-        <Grid container spacing={1}>
-            {grid.map((line) => (
-                <Grid container item spacing={1}>
-                    {line.map((btn) => (
-                        <Grid item spacing={1}>
-                            <ObjectiveButton id={btn.id} icon={btn.icon} />
-                        </Grid>
-                    ))}
-                </Grid>
-            ))}
-        </Grid>
-    </Box>
+    <Grid container rowSpacing={2}>
+        {grid.map((line) => (
+            <Grid container item spacing={1}>
+                {line.map(({ id, icon }) => (
+                    <Grid item>
+                        <ObjectiveButton id={id} icon={icon} />
+                    </Grid>
+                ))}
+            </Grid>
+        ))}
+    </Grid>
 );
 
 export default Table;

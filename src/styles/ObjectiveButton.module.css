@@ -1,10 +1,18 @@
 .ob-button {
-    /* border: 1px solid red; */
-    width: max-content;
-    height: max-content;
 }
 
 .ob-button__icon {
-    width: 100px;
-    height: 100px;
+    @apply w-32;
+    @apply h-32;
+
+    @apply transition-shadow;
+
+    @apply rounded;
+    box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.3), 
+        0 1px 2px -1px rgb(0 0 0 / 0.3);
+}
+
+.ob-button__icon:hover {
+    box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.3), 
+        0 4px 6px -4px rgb(0 0 0 / 0.3);
 }
