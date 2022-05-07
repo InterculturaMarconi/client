@@ -22,7 +22,7 @@ module.exports = {
     plugins: ['react', '@typescript-eslint', 'prettier', 'import'],
     settings: {
         'import/parsers': {
-            '@typescript-eslint/parser': ['.ts', '.tsx'],
+            '@typescript-eslint/parser': ['.ts', '.tsx', '.css'],
         },
         'import/resolver': {
             typescript: {
