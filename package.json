@@ -33,7 +33,7 @@
     },
     "lint-staged": {
         "*.{js,jsx,ts,tsx}": [
-            "npm run prettier --write --"
+            "npx prettier --write --"
         ]
     },
     "husky": {
