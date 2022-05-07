@@ -1,11 +1,8 @@
 import React from 'react';
 import Grid from '@mui/material/Grid';
 
-// import { useClass } from '~/hooks/Styles';
-import ObjectiveButton from '~/components/ObjectiveButton';
+import ObjectiveButton from '~/components/buttons/ObjectiveButton';
 import { useImage } from '~/hooks/Image';
-
-// import styles from '~/styles/Table.module.css';
 
 interface IObjectiveButton {
     id: number;
@@ -35,14 +32,14 @@ const grid: IObjectiveButton[][] = [
         { id: 15, icon: useImage('obbiettivi/15.jpg') },
         { id: 16, icon: useImage('obbiettivi/16.jpg') },
         { id: 17, icon: useImage('obbiettivi/17.jpg') },
-        // { id: 18, icon: ob18 },
+        { id: 18, icon: '' },
     ],
 ];
 
 const Table = () => (
     <Grid container rowSpacing={2}>
         {grid.map(line => (
-            <Grid container item spacing={1}>
+            <Grid container item spacing={1} justifyContent="center">
                 {line.map(({ id, icon }) => (
                     <Grid item>
                         <ObjectiveButton id={id} icon={icon} />

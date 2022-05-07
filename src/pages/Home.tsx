@@ -8,6 +8,9 @@ import TrePersoneMondo from '~/img/TrePersoneMondo.png';
 import { Box } from '@mui/system';
 import Typography from '@mui/material/Typography';
 import { Grid } from '@mui/material';
+import { useClass } from '~/hooks/Styles';
+
+import styles from '~/styles/Home.module.css';
 
 const Home: React.FC = () => (
     <Page title="Home | InterculturaMarconi">
@@ -29,7 +32,9 @@ const Home: React.FC = () => (
                 </Typography>
             </Box>
         </Grid>
-        <Table />
+        <Box className={useClass(styles, 'table-box')}>
+            <Table />
+        </Box>
         <Footer />
     </Page>
 );

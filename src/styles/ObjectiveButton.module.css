@@ -2,8 +2,8 @@
 }
 
 .ob-button__icon {
-    @apply w-32;
-    @apply h-32;
+    @apply w-36;
+    @apply h-36;
 
     @apply transition-shadow;
 

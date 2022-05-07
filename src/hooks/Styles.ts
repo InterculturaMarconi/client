@@ -1,1 +1,1 @@
-export const useClass = (...classes: string[]) => classes.join(' ');
+export const useClass = (styles: CSSModuleClasses, ...classes: string[]) => classes.map(name => styles[name]).join(' ');
