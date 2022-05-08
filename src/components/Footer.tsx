@@ -1,27 +1,91 @@
 import React from 'react';
-import Paper from '@mui/material/Paper';
+import { Box } from '@mui/system';
+import { Grid, styled, Typography, useTheme } from '@mui/material';
 
-const Footer = () => {
+import { Link } from 'react-router-dom';
+
+const StyledLink = styled(Link)(({ theme }) => ({
+    color: 'white',
+    textDecoration: 'none',
+    ...theme.typography.body1,
+    fontWeight: 'bold',
+    transition: theme.transitions.create('color', {
+        duration: theme.transitions.duration.short,
+        easing: theme.transitions.easing.easeInOut,
+    }),
+    '&:hover': {
+        color: '#e3f1ff',
+    },
+}));
+
+const pages = [
+    { page: 'Products', link: '/products' },
+    { page: 'Pricing', link: '/pricing' },
+    { page: 'Blog', link: '/blog' },
+];
+
+const Footer: React.FC = () => {
+    const theme = useTheme();
+
     return (
-        <Paper elevation={1}>
-            <p>
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Tempore ipsam deserunt,
-                natus deleniti dignissimos fugiat aliquam aut distinctio. Autem alias quo
-                accusantium similique modi nam excepturi deserunt necessitatibus dolorum numquam.
-                Molestiae recusandae maiores sunt, nisi doloribus magnam possimus doloremque tempore
-                consequatur quae, corrupti, rerum veritatis eaque debitis velit? Porro veritatis
-                tenetur ipsum earum officiis officia, dolor quas atque beatae. Suscipit? Eos debitis
-                tempora eaque magnam, nulla ratione laborum vitae itaque dolorum nesciunt quisquam
-                eveniet repellendus vel esse ea. Fuga blanditiis, nam inventore voluptatem sit in
-                quibusdam maiores soluta amet eos. Accusantium tenetur quasi sit repellendus. Eos
-                voluptatum aperiam, laudantium facilis eaque ipsa eum ullam qui eius asperiores
-                possimus ad totam hic voluptates sed perferendis, eveniet nihil. Veritatis delectus
-                consequuntur molestiae. Consectetur reiciendis architecto rem, tenetur dolore earum
-                ipsa nesciunt eligendi distinctio illo animi quibusdam aliquam, enim atque quae in
-                nobis sapiente. Nemo, exercitationem! Quo autem beatae asperiores quisquam
-                reprehenderit atque?
-            </p>
-        </Paper>
+        <Box
+            sx={{
+                backgroundColor: 'primary.main',
+                position: 'absolute',
+                bottom: 0,
+                width: '100vw',
+                height: '20rem',
+                py: '3.5rem',
+                color: 'white',
+            }}
+            component="footer"
+        >
+            <Grid
+                container
+                sx={{
+                    mx: 'auto',
+                    px: { xs: '1.25rem', md: '0' },
+                    maxWidth: { md: '60rem !important', lg: '70rem !important' },
+                    width: '100%',
+                    height: '100%',
+                }}
+                justifyContent="space-between"
+                flexDirection={{ xs: 'column', md: 'row' }}
+            >
+                <Grid item>
+                    <Typography variant="body2">
+                        &copy; {new Date().getFullYear()} InterculturaMarconi
+                    </Typography>
+                </Grid>
+                <Grid
+                    item
+                    container
+                    sx={{
+                        mt: { xs: '1.5rem', md: '0' },
+                        width: { xs: '100%', md: '60%' },
+                    }}
+                >
+                    <Grid
+                        item
+                        sx={{
+                            display: 'flex',
+                            flexDirection: 'column',
+                            justifyContent: 'left',
+                        }}
+                    >
+                        <Typography variant="caption" mb="1rem">
+                            Sezioni
+                        </Typography>
+                        {pages.map(({ page, link }) => (
+                            <StyledLink key={page} to="/">
+                                {page}
+                            </StyledLink>
+                        ))}
+                    </Grid>
+                    <Grid item></Grid>
+                </Grid>
+            </Grid>
+        </Box>
     );
 };
 
