@@ -1,6 +1,21 @@
 import React from 'react';
-import { createTheme, PaletteMode, ThemeProvider, useMediaQuery } from '@mui/material';
-import { DocumentScannerTwoTone } from '@mui/icons-material';
+import { createTheme, CssBaseline, PaletteMode, ThemeProvider, useMediaQuery } from '@mui/material';
+
+const createThemeMode = (mode: PaletteMode) =>
+    createTheme({
+        palette: {
+            mode,
+        },
+        breakpoints: {
+            values: {
+                xs: 0,
+                sm: 640,
+                md: 1024,
+                lg: 1200,
+                xl: 1920,
+            },
+        },
+    });
 
 interface IPaletteModeContext {
     mode: PaletteMode;
@@ -46,11 +61,7 @@ export const PaletteModeProvider: React.FC<IPaletteModeProvider> = ({ children }
 
     const { theme, value } = React.useMemo(
         () => ({
-            theme: createTheme({
-                palette: {
-                    mode,
-                },
-            }),
+            theme: createThemeMode(mode),
             value: { mode, toggle },
         }),
         [mode],
@@ -58,7 +69,10 @@ export const PaletteModeProvider: React.FC<IPaletteModeProvider> = ({ children }
 
     return (
         <PaletteModeContext.Provider value={value}>
-            <ThemeProvider theme={theme}>{children}</ThemeProvider>
+            <ThemeProvider theme={theme}>
+                <CssBaseline />
+                {children}
+            </ThemeProvider>
         </PaletteModeContext.Provider>
     );
 };
