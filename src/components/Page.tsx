@@ -1,4 +1,3 @@
-import { CssBaseline } from '@mui/material';
 import React from 'react';
 
 interface IPage {
@@ -11,12 +10,7 @@ const Page: React.FC<IPage> = ({ children, title }) => {
         document.title = title;
     });
 
-    return (
-        <main>
-            <CssBaseline />
-            {children}
-        </main>
-    );
+    return <main>{children}</main>;
 };
 
 export default Page;
