@@ -1,8 +1,8 @@
 import React from 'react';
 import { Box } from '@mui/system';
-import { Grid, styled, Typography, TypographyProps, useTheme } from '@mui/material';
+import { Grid, styled, Typography, useTheme } from '@mui/material';
 import { Link } from 'react-router-dom';
-import { FontAwesomeIcon, FontAwesomeIconProps } from '@fortawesome/react-fontawesome';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import FooterTitle from '~/components/footer/FooterTitle';
 import FooterContent from '~/components/footer/FooterContent';
@@ -25,9 +25,9 @@ const StyledLink = styled(Link)(({ theme }) => ({
 }));
 
 const StyledImg = styled('img')(({ theme }) => ({
-    maxWidth: '14rem',
+    maxWidth: theme.spacing(32),
     [theme.breakpoints.down('sm')]: {
-        maxWidth: '7rem',
+        maxWidth: theme.spacing(14),
     },
 }));
 
@@ -39,17 +39,15 @@ const pages = [
 ];
 
 const Footer: React.FC = () => {
-    const theme = useTheme();
-
     return (
         <Box
             sx={{
                 backgroundColor: 'primary.main',
                 position: 'relative',
-                bottom: 0,
+                bottom: '0',
                 width: '100%',
-                height: 'calc(max-content + 10rem)',
-                py: '3.5rem',
+                height: 'max-content',
+                py: 10,
                 color: 'white',
             }}
             component="footer"
@@ -58,7 +56,7 @@ const Footer: React.FC = () => {
                 container
                 sx={{
                     mx: 'auto',
-                    px: { xs: '1.25rem', md: '0' },
+                    px: { xs: 4, md: '0' },
                     maxWidth: { md: '60rem !important', lg: '70rem !important' },
                     width: '100%',
                     height: '100%',
@@ -71,7 +69,7 @@ const Footer: React.FC = () => {
                     sx={{
                         display: 'flex',
                         flexDirection: { xs: 'row', md: 'column' },
-                        justifyContent: 'space-between',
+                        justifyContent: 'space-around',
                         alignItems: 'left',
                     }}
                 >
@@ -84,11 +82,12 @@ const Footer: React.FC = () => {
                     item
                     container
                     sx={{
-                        mt: { xs: '1.5rem', md: '0' },
+                        mt: { xs: 6, md: '0' },
+                        pr: { xs: 0, md: 10, lg: 5 },
                         width: { xs: '100%', md: '60%' },
                     }}
-                    justifyContent="space-between"
                     columns={{ xs: 11, md: 12 }}
+                    justifyContent="space-between"
                 >
                     <FooterContent>
                         <FooterTitle>Sezioni</FooterTitle>

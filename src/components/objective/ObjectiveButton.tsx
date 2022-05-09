@@ -1,4 +1,4 @@
-import { Box, styled } from '@mui/material';
+import { Box, LinkProps, styled } from '@mui/material';
 import React from 'react';
 import { Link } from 'react-router-dom';
 
@@ -7,10 +7,18 @@ export interface IObjectiveButton {
     icon: string;
 }
 
-const Icon = styled('img')(({ theme }) => ({
+const ObjectiveButton = styled(({ id, icon, ...props }: IObjectiveButton) => (
+    <Link to={`/obbiettivo/${id}`} {...props}></Link>
+))<IObjectiveButton>(({ theme, icon }) => ({
     width: '9rem',
     height: '9rem',
-    borderRadius: '.25rem',
+    display: 'inline-block',
+    borderRadius: theme.spacing(0.5),
+    backgroundImage: `url(${icon})`,
+    backgroundColor: 'white',
+    backgroundRepeat: 'no-repeat',
+    backgroundSize: 'contain',
+    backgroundPosition: 'center',
     transition: theme.transitions.create('box-shadow', {
         easing: theme.transitions.easing.easeInOut,
         duration: theme.transitions.duration.standard,
@@ -20,11 +28,5 @@ const Icon = styled('img')(({ theme }) => ({
         boxShadow: theme.shadows[8],
     },
 }));
-
-const ObjectiveButton: React.FC<IObjectiveButton> = ({ id, icon }) => (
-    <Link to={`/obbiettivi/${id}`}>
-        <Icon src={icon} alt={`${id}`} />
-    </Link>
-);
 
 export default ObjectiveButton;

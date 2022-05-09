@@ -30,9 +30,17 @@ const btns: IObjectiveButton[] = [
 
 const ObjectivesTable = () => (
     <Container maxWidth="md">
-        <Grid container spacing={2}>
+        <Grid container spacing={2} justifyContent="space-around">
             {btns.map(btn => (
-                <Grid item xs={6} sm={4} md={2} key={btn.icon}>
+                <Grid
+                    item
+                    container
+                    xs={6}
+                    sm={4}
+                    md={2}
+                    justifyContent="space-around"
+                    key={btn.icon}
+                >
                     <ObjectiveButton {...btn} />
                 </Grid>
             ))}
