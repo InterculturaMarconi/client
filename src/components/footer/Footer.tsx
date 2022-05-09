@@ -7,6 +7,8 @@ import { FontAwesomeIcon, FontAwesomeIconProps } from '@fortawesome/react-fontaw
 import FooterTitle from '~/components/footer/FooterTitle';
 import FooterContent from '~/components/footer/FooterContent';
 import { faGithub, faInstagram } from '@fortawesome/free-brands-svg-icons';
+import { useImage } from '~/hooks/Image';
+import FooterSocialLink from './FooterSocialLink';
 
 const StyledLink = styled(Link)(({ theme }) => ({
     color: 'white',
@@ -22,22 +24,10 @@ const StyledLink = styled(Link)(({ theme }) => ({
     },
 }));
 
-interface SocialLinkProps {
-    size: 'big' | 'medium';
-}
-
-const FooterSocialLink = styled('a')<SocialLinkProps>(({ theme, size }) => ({
-    ...theme.typography[size === 'big' ? 'h5' : 'body1'],
-    marginRight: theme.spacing(1.5),
-    fontWeight: 'bold',
-    textDecoration: 'none',
-    color: 'white',
-    transition: theme.transitions.create('color', {
-        duration: theme.transitions.duration.short,
-        easing: theme.transitions.easing.easeInOut,
-    }),
-    '&:hover': {
-        color: '#e3f1ff',
+const StyledImg = styled('img')(({ theme }) => ({
+    maxWidth: '14rem',
+    [theme.breakpoints.down('sm')]: {
+        maxWidth: '7rem',
     },
 }));
 
@@ -58,7 +48,7 @@ const Footer: React.FC = () => {
                 position: 'relative',
                 bottom: 0,
                 width: '100%',
-                height: 'max-content',
+                height: 'calc(max-content + 10rem)',
                 py: '3.5rem',
                 color: 'white',
             }}
@@ -85,7 +75,8 @@ const Footer: React.FC = () => {
                         alignItems: 'left',
                     }}
                 >
-                    <Typography variant="body2">
+                    <StyledImg src={useImage('logo_marconi.png')} alt="LOGO" />
+                    <Typography variant="body2" sx={{ my: 'auto' }}>
                         &copy; {new Date().getFullYear()} InterculturaMarconi
                     </Typography>
                 </Grid>
