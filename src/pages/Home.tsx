@@ -33,7 +33,7 @@ const Home: React.FC = () => (
         <Box sx={{ marginY: '4em' }}>
             <ObjectivesTable />
         </Box>
-        {/* <Footer /> */}
+        <Footer />
     </Page>
 );
 

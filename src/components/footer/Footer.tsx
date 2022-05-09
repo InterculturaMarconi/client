@@ -55,9 +55,9 @@ const Footer: React.FC = () => {
         <Box
             sx={{
                 backgroundColor: 'primary.main',
-                position: 'absolute',
+                position: 'relative',
                 bottom: 0,
-                width: '100vw',
+                width: '100%',
                 height: 'max-content',
                 py: '3.5rem',
                 color: 'white',
@@ -112,7 +112,7 @@ const Footer: React.FC = () => {
                         <StyledLink to="/privacy">Infromativa Privacy</StyledLink>
                         <StyledLink to="/tou">Termini di Utilizzo</StyledLink>
                     </FooterContent>
-                    <FooterContent>
+                    <FooterContent sx={{ mt: { xs: 3, md: 0 } }}>
                         <FooterTitle>Supporto</FooterTitle>
                         <Typography variant="body1" fontWeight={700}>
                             Inviaci una mail:

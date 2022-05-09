@@ -2,22 +2,14 @@ import { Box, styled } from '@mui/material';
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-interface IObjectiveButton {
+export interface IObjectiveButton {
     id: number;
     icon: string;
 }
 
-interface IIcon {
-    href: string;
-}
-
-const Icon = styled('span')<IIcon>(({ theme, href }) => ({
-    backgroundImage: `url(${href})`,
-    backgroundSize: 'cover',
-    backgroundPosition: 'center',
+const Icon = styled('img')(({ theme }) => ({
     width: '9rem',
     height: '9rem',
-    display: 'block',
     borderRadius: '.25rem',
     transition: theme.transitions.create('box-shadow', {
         easing: theme.transitions.easing.easeInOut,
@@ -31,7 +23,7 @@ const Icon = styled('span')<IIcon>(({ theme, href }) => ({
 
 const ObjectiveButton: React.FC<IObjectiveButton> = ({ id, icon }) => (
     <Link to={`/obbiettivi/${id}`}>
-        <Icon href={icon} />
+        <Icon src={icon} alt={`${id}`} />
     </Link>
 );
 
