@@ -1,16 +1,37 @@
 import React from 'react';
 import { Box } from '@mui/system';
-import { Grid, styled, Typography, useTheme } from '@mui/material';
+import { Grid, styled, Typography, TypographyProps, useTheme } from '@mui/material';
 import { Link } from 'react-router-dom';
+import { FontAwesomeIcon, FontAwesomeIconProps } from '@fortawesome/react-fontawesome';
 
 import FooterTitle from '~/components/footer/FooterTitle';
 import FooterContent from '~/components/footer/FooterContent';
+import { faGithub, faInstagram } from '@fortawesome/free-brands-svg-icons';
 
 const StyledLink = styled(Link)(({ theme }) => ({
     color: 'white',
     textDecoration: 'none',
     ...theme.typography.body1,
     fontWeight: 'bold',
+    transition: theme.transitions.create('color', {
+        duration: theme.transitions.duration.short,
+        easing: theme.transitions.easing.easeInOut,
+    }),
+    '&:hover': {
+        color: '#e3f1ff',
+    },
+}));
+
+interface SocialLinkProps {
+    size: 'big' | 'medium';
+}
+
+const FooterSocialLink = styled('a')<SocialLinkProps>(({ theme, size }) => ({
+    ...theme.typography[size === 'big' ? 'h5' : 'body1'],
+    marginRight: theme.spacing(1.5),
+    fontWeight: 'bold',
+    textDecoration: 'none',
+    color: 'white',
     transition: theme.transitions.create('color', {
         duration: theme.transitions.duration.short,
         easing: theme.transitions.easing.easeInOut,
@@ -78,21 +99,36 @@ const Footer: React.FC = () => {
                         ))}
                     </FooterContent>
                     <FooterContent>
-                        <FooterTitle>Testo a caso</FooterTitle>
+                        <FooterTitle>Informazioni</FooterTitle>
+                        <StyledLink to="/privacy">Infromativa Privacy</StyledLink>
+                        <StyledLink to="/tou">Termini di Utilizzo</StyledLink>
                     </FooterContent>
                     <FooterContent>
                         <FooterTitle>Supporto</FooterTitle>
-                        <StyledLink to="mailto:interculturamarconi@gmail.com">
+                        <Typography variant="body1" fontWeight={700}>
+                            Inviaci una mail:
+                        </Typography>
+                        <FooterSocialLink size="medium" href="mailto:interculturamarconi@gmail.com">
                             interculturamarconi@gmail.com
-                        </StyledLink>
+                        </FooterSocialLink>
                         <Grid
                             item
                             sx={{
+                                mt: 3,
                                 display: 'flex',
                                 flexDirection: 'row',
-                                justifyContent: 'space-between',
                             }}
-                        ></Grid>
+                        >
+                            <FooterSocialLink size="big" href="">
+                                <FontAwesomeIcon icon={faInstagram} />
+                            </FooterSocialLink>
+                            <FooterSocialLink
+                                size="big"
+                                href="https://github.com/InterculturaMarconi"
+                            >
+                                <FontAwesomeIcon icon={faGithub} />
+                            </FooterSocialLink>
+                        </Grid>
                     </FooterContent>
                 </Grid>
             </Grid>
