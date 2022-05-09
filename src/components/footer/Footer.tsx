@@ -1,8 +1,10 @@
 import React from 'react';
 import { Box } from '@mui/system';
 import { Grid, styled, Typography, useTheme } from '@mui/material';
-
 import { Link } from 'react-router-dom';
+
+import FooterTitle from '~/components/footer/FooterTitle';
+import FooterContent from '~/components/footer/FooterContent';
 
 const StyledLink = styled(Link)(({ theme }) => ({
     color: 'white',
@@ -19,6 +21,7 @@ const StyledLink = styled(Link)(({ theme }) => ({
 }));
 
 const pages = [
+    { page: 'Home', link: '/' },
     { page: 'Products', link: '/products' },
     { page: 'Pricing', link: '/pricing' },
     { page: 'Blog', link: '/blog' },
@@ -64,25 +67,33 @@ const Footer: React.FC = () => {
                         mt: { xs: '1.5rem', md: '0' },
                         width: { xs: '100%', md: '60%' },
                     }}
+                    justifyContent="space-between"
                 >
-                    <Grid
-                        item
-                        sx={{
-                            display: 'flex',
-                            flexDirection: 'column',
-                            justifyContent: 'left',
-                        }}
-                    >
-                        <Typography variant="caption" mb="1rem">
-                            Sezioni
-                        </Typography>
+                    <FooterContent>
+                        <FooterTitle>Sezioni</FooterTitle>
                         {pages.map(({ page, link }) => (
-                            <StyledLink key={page} to="/">
+                            <StyledLink key={page} to={link}>
                                 {page}
                             </StyledLink>
                         ))}
-                    </Grid>
-                    <Grid item></Grid>
+                    </FooterContent>
+                    <FooterContent>
+                        <FooterTitle>Testo a caso</FooterTitle>
+                    </FooterContent>
+                    <FooterContent>
+                        <FooterTitle>Supporto</FooterTitle>
+                        <StyledLink to="mailto:interculturamarconi@gmail.com">
+                            interculturamarconi@gmail.com
+                        </StyledLink>
+                        <Grid
+                            item
+                            sx={{
+                                display: 'flex',
+                                flexDirection: 'row',
+                                justifyContent: 'space-between',
+                            }}
+                        ></Grid>
+                    </FooterContent>
                 </Grid>
             </Grid>
         </Box>

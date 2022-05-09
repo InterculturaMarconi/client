@@ -3,7 +3,7 @@ import React from 'react';
 import Navbar from '~/components/Navbar';
 import ObjectivesTable from '~/components/objective/ObjectivesTable';
 import Page from '~/components/Page';
-import Footer from '~/components/Footer';
+import Footer from '~/components/footer/Footer';
 import TrePersoneMondo from '~/img/TrePersoneMondo.png';
 import { Box } from '@mui/system';
 import Typography from '@mui/material/Typography';
