@@ -58,7 +58,7 @@ const Footer: React.FC = () => {
                 position: 'absolute',
                 bottom: 0,
                 width: '100vw',
-                height: '20rem',
+                height: 'max-content',
                 py: '3.5rem',
                 color: 'white',
             }}
@@ -76,7 +76,15 @@ const Footer: React.FC = () => {
                 justifyContent="space-between"
                 flexDirection={{ xs: 'column', md: 'row' }}
             >
-                <Grid item>
+                <Grid
+                    item
+                    sx={{
+                        display: 'flex',
+                        flexDirection: { xs: 'row', md: 'column' },
+                        justifyContent: 'space-between',
+                        alignItems: 'left',
+                    }}
+                >
                     <Typography variant="body2">
                         &copy; {new Date().getFullYear()} InterculturaMarconi
                     </Typography>
@@ -89,6 +97,7 @@ const Footer: React.FC = () => {
                         width: { xs: '100%', md: '60%' },
                     }}
                     justifyContent="space-between"
+                    columns={{ xs: 11, md: 12 }}
                 >
                     <FooterContent>
                         <FooterTitle>Sezioni</FooterTitle>
