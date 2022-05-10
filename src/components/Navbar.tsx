@@ -12,7 +12,7 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
-import LogoMarconi from '~/img/logo_marconi.png';
+import LogoMarconi from '~/img/Logo_Marconi_Vet.svg';
 
 import PaletteModeButton from '~/components/PaletteModeButton';
 

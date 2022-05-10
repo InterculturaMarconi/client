@@ -74,7 +74,7 @@ const Footer: React.FC = () => {
                         alignItems: 'left',
                     }}
                 >
-                    <StyledImg src={useImage('logo_marconi.png')} alt="LOGO" />
+                    <StyledImg src={useImage('Logo_Marconi_Vet.svg')} alt="LOGO" />
                     <Typography variant="body2" sx={{ my: 'auto' }}>
                         &copy; {new Date().getFullYear()} InterculturaMarconi
                     </Typography>
