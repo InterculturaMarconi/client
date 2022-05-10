@@ -16,12 +16,11 @@ import Obiettivo1 from '~/pages/obiettivo/Obiettivo1';
 // import Obiettivo12 from '~/pages/Obiettivo12';
 // import Obiettivo13 from '~/pages/Obiettivo13';
 import Obiettivo14 from '~/pages/obiettivo/Obiettivo14';
+import ObjectiveCover from './components/objective/ObjectiveCover';
 // import Obiettivo15 from '~/pages/Obiettivo15';
 // import Obiettivo16 from '~/pages/Obiettivo16';
 // import Obiettivo17 from '~/pages/Obiettivo17';
 // import Obiettivo18 from '~/pages/Obiettivo18';
-
-import Footer from '~/components/footer/Footer';
 
 const App: React.FC = () => (
     <Routes>
@@ -45,7 +44,7 @@ const App: React.FC = () => (
         <Route path="/obiettivo/17" element={<Obiettivo1 />} />
         <Route path="/obiettivo/18" element={<Obiettivo1 />} />
 
-        <Route path="/test" element={<Footer />} />
+        <Route path="/test" element={<ObjectiveCover />} />
     </Routes>
 );
 
