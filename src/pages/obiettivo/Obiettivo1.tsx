@@ -6,6 +6,7 @@ import ObjectiveCard from '~/components/objective/ObjectiveCard';
 import { Box } from '@mui/system';
 import { Card } from '@mui/material';
 import { useImage } from '~/hooks/Image';
+import ReactPlayer from 'react-player';
 
 const Obiettivo1: React.FC = () => (
     <Page title="Obiettivo 1 | InterculturaMarconi">
@@ -26,6 +27,8 @@ const Obiettivo1: React.FC = () => (
                 <strong>Un'attenta gestione</strong> di questa fondamentale risorsa globale è alla
                 base di un <strong>futuro sostenibile.</strong>
             </ObjectiveCard>
+
+            <ReactPlayer url="https://www.youtube.com/watch?v=CcNWGKsCSTc" />
         </Box>
     </Page>
 );
