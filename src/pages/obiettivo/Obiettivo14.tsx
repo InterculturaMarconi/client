@@ -1,10 +1,11 @@
 import React from 'react';
+import ReactPlayer from 'react-player';
+import { Box } from '@mui/system';
 
 import Page from '~/components/Page';
 import ObjectiveCover from '~/components/objective/ObjectiveCover';
 import { useImage } from '~/hooks/Image';
 import ObjectiveCard from '~/components/objective/ObjectiveCard';
-import { Box } from '@mui/system';
 
 const Obiettivo14: React.FC = () => (
     <Page title="Obiettivo 14 | InterculturaMarconi" background="#1f97d4">
@@ -30,6 +31,7 @@ const Obiettivo14: React.FC = () => (
                 base di un <strong>futuro sostenibile.</strong>
             </ObjectiveCard>
         </Box>
+        <ReactPlayer url="https://www.youtube.com/watch?v=CcNWGKsCSTc" />
     </Page>
 );
 export default Obiettivo14;
