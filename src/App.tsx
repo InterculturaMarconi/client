@@ -16,6 +16,8 @@ import Obiettivo1 from '~/pages/obiettivo/Obiettivo1';
 // import Obiettivo12 from '~/pages/Obiettivo12';
 // import Obiettivo13 from '~/pages/Obiettivo13';
 import Obiettivo14 from '~/pages/obiettivo/Obiettivo14';
+import ObjectiveBanner from './components/objective/ObjectiveBanner';
+import { useImage } from './hooks/Image';
 // import Obiettivo15 from '~/pages/Obiettivo15';
 // import Obiettivo16 from '~/pages/Obiettivo16';
 // import Obiettivo17 from '~/pages/Obiettivo17';
@@ -43,7 +45,7 @@ const App: React.FC = () => (
         <Route path="/obiettivo/17" element={<Obiettivo1 />} />
         <Route path="/obiettivo/18" element={<Obiettivo1 />} />
 
-        {/* <Route path="/test" element={} /> */}
+        {/* <Route path="/test" element={<ObjectiveBanner img={useImage("obb14/img3obb14.png")} title="- Scopriamo l'obiettivo! -" />} /> */}
     </Routes>
 );
 

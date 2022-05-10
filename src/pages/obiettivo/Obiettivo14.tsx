@@ -6,6 +6,8 @@ import Page from '~/components/Page';
 import ObjectiveCover from '~/components/objective/ObjectiveCover';
 import { useImage } from '~/hooks/Image';
 import ObjectiveCard from '~/components/objective/ObjectiveCard';
+import { Container } from '@mui/material';
+import ObjectiveBanner from '~/components/objective/ObjectiveBanner';
 
 const Obiettivo14: React.FC = () => (
     <Page title="Obiettivo 14 | InterculturaMarconi" background="#1f97d4">
@@ -31,7 +33,10 @@ const Obiettivo14: React.FC = () => (
                 base di un <strong>futuro sostenibile.</strong>
             </ObjectiveCard>
         </Box>
-        <ReactPlayer url="https://www.youtube.com/watch?v=CcNWGKsCSTc" />
+        <ObjectiveBanner img={useImage('obb14/img3obb14.png')} title="- Scopriamo l'obiettivo! -" />
+        <Container sx={{ mt: 5 }}>
+            <ReactPlayer url="https://www.youtube.com/watch?v=CcNWGKsCSTc" />
+        </Container>
     </Page>
 );
 export default Obiettivo14;
