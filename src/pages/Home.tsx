@@ -1,10 +1,7 @@
 import React from 'react';
 
-import Navbar from '~/components/Navbar';
 import ObjectivesTable from '~/components/objective/ObjectivesTable';
 import Page from '~/components/Page';
-import Footer from '~/components/footer/Footer';
-import TrePersoneMondo from '~/img/TrePersoneMondo.png';
 import draw1 from '~/img/draw/001-drawkit-content-man-colour.svg';
 import { Box } from '@mui/system';
 import Typography from '@mui/material/Typography';
@@ -12,7 +9,6 @@ import { Grid } from '@mui/material';
 
 const Home: React.FC = () => (
     <Page title="Home | InterculturaMarconi">
-        <Navbar />
         <Grid container spacing={1} alignItems="center" justifyContent="center">
             <Box sx={{ marginY: '4em' }}>
                 <img src={draw1} height={400} alt="" />
@@ -36,7 +32,6 @@ const Home: React.FC = () => (
         <Box sx={{ marginY: '4em' }}>
             <ObjectivesTable />
         </Box>
-        <Footer />
     </Page>
 );
 

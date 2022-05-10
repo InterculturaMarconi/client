@@ -22,7 +22,6 @@ import Obiettivo1 from '~/pages/obiettivo/Obiettivo1';
 // import Obiettivo18 from '~/pages/Obiettivo18';
 
 import Footer from '~/components/footer/Footer';
-import ObjectivesTable from './components/objective/ObjectivesTable';
 
 const App: React.FC = () => (
     <Routes>
@@ -46,7 +45,7 @@ const App: React.FC = () => (
         <Route path="/obiettivo/17" element={<Obiettivo1 />} />
         <Route path="/obiettivo/18" element={<Obiettivo1 />} />
 
-        <Route path="/test" element={<ObjectivesTable />} />
+        <Route path="/test" element={<Footer />} />
     </Routes>
 );
 

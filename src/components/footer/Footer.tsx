@@ -45,10 +45,12 @@ const Footer: React.FC = () => {
             sx={{
                 backgroundColor: theme.palette.mode === 'dark' ? '#39393D' : '#007bb8',
                 position: 'relative',
-                bottom: '0',
+                bottom: 0,
+                left: 0,
+                right: 0,
                 width: '100%',
                 height: 'max-content',
-                py: 10,
+                py: 13,
                 color: 'white',
             }}
             component="footer"
