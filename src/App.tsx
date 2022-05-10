@@ -15,7 +15,7 @@ import Obiettivo1 from '~/pages/obiettivo/Obiettivo1';
 // import Obiettivo11 from '~/pages/Obiettivo11';
 // import Obiettivo12 from '~/pages/Obiettivo12';
 // import Obiettivo13 from '~/pages/Obiettivo13';
-// import Obiettivo14 from '~/pages/Obiettivo14';
+import Obiettivo14 from '~/pages/obiettivo/Obiettivo14';
 // import Obiettivo15 from '~/pages/Obiettivo15';
 // import Obiettivo16 from '~/pages/Obiettivo16';
 // import Obiettivo17 from '~/pages/Obiettivo17';
@@ -40,7 +40,7 @@ const App: React.FC = () => (
         <Route path="/obiettivo/11" element={<Obiettivo1 />} />
         <Route path="/obiettivo/12" element={<Obiettivo1 />} />
         <Route path="/obiettivo/13" element={<Obiettivo1 />} />
-        <Route path="/obiettivo/14" element={<Obiettivo1 />} />
+        <Route path="/obiettivo/14" element={<Obiettivo14 />} />
         <Route path="/obiettivo/15" element={<Obiettivo1 />} />
         <Route path="/obiettivo/16" element={<Obiettivo1 />} />
         <Route path="/obiettivo/17" element={<Obiettivo1 />} />
