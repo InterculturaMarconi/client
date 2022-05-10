@@ -15,6 +15,15 @@ const createThemeMode = (mode: PaletteMode) =>
                 xl: 1920,
             },
         },
+        components: {
+            MuiCssBaseline: {
+                styleOverrides: `
+                    html, body, #root {
+                        min-height: 100vh;
+                    }
+                `,
+            },
+        },
     });
 
 interface IPaletteModeContext {
