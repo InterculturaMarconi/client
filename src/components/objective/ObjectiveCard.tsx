@@ -27,9 +27,7 @@ const ObjectiveCard: React.FC<IObjectiveCard> = ({ children, img }) => {
                                 alt="Live from space album cover"
                             />
                             <Box width={600} sx={{ marginX: '4em' }}>
-                                <Typography component="div" variant="body1">
-                                    {children}
-                                </Typography>
+                                {children}
                             </Box>
                         </Grid>
                     </CardContent>

@@ -9,8 +9,8 @@ interface IPage {
     background?: string;
 }
 
-const Main = styled('main')<{ background?: string }>(({ background }) => ({
-    backgroundColor: background ?? 'inherit',
+const Main = styled('main')<{ background?: string }>(({ background, theme }) => ({
+    backgroundColor: background && theme.palette.mode === 'light' ? background : 'inherit',
 }));
 
 const Page: React.FC<IPage> = ({ children, title, background }) => {
