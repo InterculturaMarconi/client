@@ -8,7 +8,7 @@ export interface IObjectiveButton {
 }
 
 const ObjectiveButton = styled(({ id, icon, ...props }: IObjectiveButton) => (
-    <Link to={`/obbiettivo/${id}`} {...props}></Link>
+    <Link to={`/obiettivo/${id}`} {...props}></Link>
 ))<IObjectiveButton>(({ theme, icon }) => ({
     width: '9rem',
     height: '9rem',

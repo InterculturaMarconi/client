@@ -20,7 +20,7 @@ const StyledLink = styled(Link)(({ theme }) => ({
         easing: theme.transitions.easing.easeInOut,
     }),
     '&:hover': {
-        color: '#e3f1ff',
+        color: '#e3f1ffz',
     },
 }));
 
@@ -39,10 +39,11 @@ const pages = [
 ];
 
 const Footer: React.FC = () => {
+    const theme = useTheme();
     return (
         <Box
             sx={{
-                backgroundColor: 'primary.main',
+                backgroundColor: theme.palette.mode === 'dark' ? '#39393D' : '#007bb8',
                 position: 'relative',
                 bottom: '0',
                 width: '100%',

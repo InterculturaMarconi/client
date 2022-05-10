@@ -137,7 +137,9 @@ const Navbar = () => {
                             </Button>
                         ))}
                     </Box>
-                    <PaletteModeButton />
+                    <Box sx={{ marginX: '1em' }}>
+                        <PaletteModeButton />
+                    </Box>
                     <Box sx={{ flexGrow: 0 }}>
                         <Tooltip title="Open settings">
                             <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
