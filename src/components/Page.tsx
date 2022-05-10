@@ -10,7 +10,7 @@ interface IPage {
 }
 
 const Main = styled('main')<{ background?: string }>(({ background }) => ({
-    backgroundColor: background ?? 'white',
+    backgroundColor: background ?? 'inherit',
 }));
 
 const Page: React.FC<IPage> = ({ children, title, background }) => {
