@@ -1,18 +1,28 @@
 import React from 'react';
-import { Box, Grid, Typography } from '@mui/material';
+import { Box, Grid, Typography, styled } from '@mui/material';
 import Filter from '~/components/Filter';
+import { useImage } from '~/hooks/Image';
 
 interface IObjectiveCover {
     img: string;
+    id: number;
     children: React.ReactNode;
 }
 
-const ObjectiveCover: React.FC<IObjectiveCover> = ({ children, img }) => {
+const Image = styled('img')`
+    width: 9rem;
+    height: 9rem;
+    border-radius: 0.25rem;
+
+    z-index: 4;
+`;
+
+const ObjectiveCover: React.FC<IObjectiveCover> = ({ children, img, id }) => {
     return (
         <Box
             sx={{
-                widht: '100%',
-                height: { sm: '100%', md: '70vh' },
+                width: '100%',
+                height: { xs: '93vh', md: '70vh' },
                 backgroundImage: `url('${img}')`,
                 backgroundSize: 'cover',
                 backgroundRepeat: 'no-repeat',
@@ -51,6 +61,9 @@ const ObjectiveCover: React.FC<IObjectiveCover> = ({ children, img }) => {
                         </Filter>
                     </Grid>
                 </Grid>
+                <Box sx={{ pr: 4, pt: 4 }}>
+                    <Image src={useImage(`obbiettivi/${id}.jpg`)} alt="" />
+                </Box>
             </Filter>
         </Box>
     );

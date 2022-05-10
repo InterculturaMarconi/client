@@ -18,8 +18,8 @@ const createThemeMode = (mode: PaletteMode) =>
         components: {
             MuiCssBaseline: {
                 styleOverrides: `
-                    html, body, #root {
-                        min-height: 100vh;
+                    html, body {
+                        height: 100%;
                     }
                 `,
             },

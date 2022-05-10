@@ -20,7 +20,7 @@ const ObjectiveCaption: React.FC<IObjectiveCaption> = ({ children, title }) => {
             <Box sx={{ display: 'flex', flexDirection: 'column' }}>
                 <CardContent sx={{ flex: '1 0 auto' }}>
                     <Grid container spacing={1} alignItems="center" justifyContent="center">
-                        <Typography component="div" variant="h2" color="white">
+                        <Typography component="div" variant="h2" color="white" gutterBottom>
                             {title}
                         </Typography>
                         <Box width={900} sx={{ marginX: '4em' }}>
