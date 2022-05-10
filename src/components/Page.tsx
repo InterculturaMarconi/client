@@ -1,4 +1,6 @@
 import React from 'react';
+import Footer from '~/components/footer/Footer';
+import Navbar from '~/components/Navbar';
 
 interface IPage {
     children: React.ReactNode;
@@ -10,7 +12,13 @@ const Page: React.FC<IPage> = ({ children, title }) => {
         document.title = title;
     });
 
-    return <main>{children}</main>;
+    return (
+        <>
+            <Navbar />
+            <main>{children}</main>
+            <Footer />
+        </>
+    );
 };
 
 export default Page;

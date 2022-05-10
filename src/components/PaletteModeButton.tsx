@@ -1,7 +1,5 @@
 import React from 'react';
-import { IconButton, styled, Switch, SwitchProps } from '@mui/material';
-import Brightness4 from '@mui/icons-material/Brightness4';
-import Brightness7 from '@mui/icons-material/Brightness7';
+import { styled, Switch, SwitchProps } from '@mui/material';
 import { usePaletteMode } from '~/hooks/Theme';
 
 const ModeSwitch = styled((props: SwitchProps) => (
@@ -74,10 +72,7 @@ const ModeSwitch = styled((props: SwitchProps) => (
 
 const PaletteModeButton: React.FC = () => {
     const { mode, toggle } = usePaletteMode();
-
-    const handleChange = () => toggle();
-
-    return <ModeSwitch checked={mode === 'light'} onChange={handleChange} />;
+    return <ModeSwitch checked={mode === 'light'} onChange={toggle} />;
 };
 
 export default PaletteModeButton;
