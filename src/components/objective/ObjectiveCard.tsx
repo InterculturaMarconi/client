@@ -5,7 +5,6 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
-import obb14 from '~/img/obb14/img2obb14.png';
 import { Container } from '@mui/material';
 import { Grid } from '@mui/material';
 
@@ -15,16 +14,15 @@ export interface IObjectiveCard {
 }
 
 const ObjectiveCard: React.FC<IObjectiveCard> = ({ children, img }) => {
-    const theme = useTheme();
     return (
-        <Container maxWidth="md">
+        <Container fixed>
             <Card sx={{ display: 'flex', p: 1 }}>
                 <Box sx={{ display: 'flex', flexDirection: 'column' }}>
                     <CardContent sx={{ flex: '1 0 auto' }}>
                         <Grid container spacing={1} alignItems="center" justifyContent="center">
                             <CardMedia
                                 component="img"
-                                sx={{ width: 200 }}
+                                sx={{ width: 250, borderRadius: 1.25 }}
                                 image={img}
                                 alt="Live from space album cover"
                             />
