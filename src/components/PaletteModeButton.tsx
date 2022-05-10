@@ -77,7 +77,7 @@ const PaletteModeButton: React.FC = () => {
 
     const handleChange = () => toggle();
 
-    return <ModeSwitch checked={mode === 'dark'} onChange={handleChange} />;
+    return <ModeSwitch checked={mode === 'light'} onChange={handleChange} />;
 };
 
 export default PaletteModeButton;

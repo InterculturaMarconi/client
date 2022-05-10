@@ -12,9 +12,9 @@ import { Grid } from '@mui/material';
 const Home: React.FC = () => (
     <Page title="Home | InterculturaMarconi">
         <Navbar />
-        {/* <Grid container spacing={1} alignItems="center" justifyContent="left">
+        <Grid container spacing={1} alignItems="center" justifyContent="center">
             <img src={TrePersoneMondo} height={400} alt="" />
-            <Box width={600}>
+            <Box width={600} sx={{ marginY: '4em' }}>
                 <Typography variant="h3" gutterBottom component="div">
                     Agenda 2030
                 </Typography>
@@ -29,7 +29,7 @@ const Home: React.FC = () => (
                     Paesi, infatti, si sono impegnati a raggiungerli entro il 2030.
                 </Typography>
             </Box>
-        </Grid> */}
+        </Grid>
         <Box sx={{ marginY: '4em' }}>
             <ObjectivesTable />
         </Box>

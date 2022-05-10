@@ -12,6 +12,7 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
+import LogoMarconi from '~/img/logo_marconi.png';
 
 import PaletteModeButton from '~/components/PaletteModeButton';
 
@@ -41,7 +42,7 @@ const Navbar = () => {
         <AppBar position="static">
             <Container maxWidth="xl">
                 <Toolbar disableGutters>
-                    <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
+                    {/* <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} /> */}
                     <Typography
                         variant="h6"
                         noWrap
@@ -57,7 +58,7 @@ const Navbar = () => {
                             textDecoration: 'none',
                         }}
                     >
-                        LOGO
+                        <img src={LogoMarconi} height={50} alt="" />
                     </Typography>
 
                     <Box
@@ -101,7 +102,7 @@ const Navbar = () => {
                             ))}
                         </Menu>
                     </Box>
-                    <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
+                    {/* <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} /> */}
                     <Typography
                         variant="h5"
                         noWrap
@@ -118,7 +119,7 @@ const Navbar = () => {
                             textDecoration: 'none',
                         }}
                     >
-                        LOGO
+                        <img src={LogoMarconi} height={50} alt="" />
                     </Typography>
                     <Box
                         sx={{
