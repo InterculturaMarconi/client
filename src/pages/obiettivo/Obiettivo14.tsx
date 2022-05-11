@@ -9,11 +9,14 @@ import ObjectiveCard from '~/components/objective/ObjectiveCard';
 import { Container, Typography } from '@mui/material';
 import ObjectiveBanner from '~/components/objective/ObjectiveBanner';
 import ObjectiveCaption from '~/components/objective/ObjectiveCaption';
+import ObjectiveGrid from '~/components/objective/ObjectiveGrid';
 
 const Obiettivo14: React.FC = () => (
     <Page title="Obiettivo 14 | InterculturaMarconi" background="#045389">
         <ObjectiveCover img={useImage('obb14/img1obb14.jpg')} id={14}>
-            <div>Obiettivo 14</div>
+            <div>
+                <strong>Obiettivo 14</strong>
+            </div>
             <div>Conservare e utilizzare in modo durevole gli oceani</div>
         </ObjectiveCover>
         <Box sx={{ py: 4 }}>
@@ -73,23 +76,21 @@ const Obiettivo14: React.FC = () => (
                     }}
                 >
                     <Typography variant="h4" gutterBottom fontWeight={500}>
-                        Titolo del cazzo
+                        <strong>I principali traguardi dell'obiettivo 14</strong>
                     </Typography>
                     <Typography variant="body1" gutterBottom>
-                        Gli <strong>oceani del mondo</strong> - la loro temperatura, la loro
-                        composizione chimica, le loro correnti e la loro vita -{' '}
-                        <strong>
-                            influenzano i sistemi globali che rendono la Terra un luogo vivibile per
-                            il genere umano.
-                        </strong>
-                        L'acqua piovana, l'acqua che beviamo, il clima, le nostre coste, molto del
-                        nostro cibo e persino l'ossigeno presente nell'aria che respiriamo sono{' '}
-                        <strong>elementi</strong> in definitiva forniti e{' '}
-                        <strong>regolati dal mare.</strong>
-                        Nel corso della storia, gli oceani e i mari sono stati e continuano ad
-                        essere canali vitali per il commercio ed il trasporto.
-                        <strong>Un'attenta gestione</strong> di questa fondamentale risorsa globale
-                        è alla base di un <strong>futuro sostenibile.</strong>
+                        L'obiettivo 14 mira a ridurre in modo significativo entro il 2025 tutti i
+                        tipi di<strong> inquinamento marittimo </strong>e a portare a un livello
+                        minimo
+                        <strong>l'acidificazione degli oceani</strong>. Già entro il 2020 gli
+                        <strong> ecosistemi marini e costieri </strong>dovranno essere gestiti e
+                        protetti in modo sostenibile. Entro il 2020 anche la pesca dovrà essere
+                        disciplinata in modo efficace. Per porre un limite alla{' '}
+                        <strong>pesca eccessiva</strong> nei mari, le attività illegali e non
+                        regolamentate in questo campo nonché le{' '}
+                        <strong>pratiche distruttive</strong> dovranno essere sradicate entro il
+                        2020. Inoltre, determinate forme di sovvenzioni alla pesca dovranno essere
+                        vietate.
                     </Typography>
                 </Box>
             </ObjectiveCard>
@@ -97,6 +98,13 @@ const Obiettivo14: React.FC = () => (
         <Container sx={{ mt: 5 }}>
             <ReactPlayer url="https://www.youtube.com/watch?v=CcNWGKsCSTc" />
         </Container>
+        <ObjectiveGrid
+            img1={useImage('obb14/img4obb14.png')}
+            img2={useImage('obb14/img4obb14.png')}
+            img3={useImage('obb14/img4obb14.png')}
+        >
+            ProvaProva
+        </ObjectiveGrid>
     </Page>
 );
 export default Obiettivo14;

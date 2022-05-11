@@ -1,5 +1,5 @@
 import React from 'react';
-
+import Divider from '@mui/material/Divider';
 import ObjectivesTable from '~/components/objective/ObjectivesTable';
 import Page from '~/components/Page';
 import draw1 from '~/img/draw/001-drawkit-content-man-colour.svg';
@@ -29,6 +29,12 @@ const Home: React.FC = () => (
                 </Typography>
             </Box>
         </Grid>
+        <Grid container spacing={1} alignItems="center" justifyContent="center">
+            <Box width={800} sx={{ marginY: '2em' }}>
+                <Divider sx={{ borderBottomWidth: 5 }} variant="middle" color="#007bb8" />
+            </Box>
+        </Grid>
+
         <Box sx={{ marginY: '4em' }}>
             <ObjectivesTable />
         </Box>
