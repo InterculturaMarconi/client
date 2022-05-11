@@ -99,11 +99,25 @@ const Obiettivo14: React.FC = () => (
             <ReactPlayer url="https://www.youtube.com/watch?v=CcNWGKsCSTc" />
         </Container>
         <ObjectiveGrid
-            img1={useImage('obb14/img4obb14.png')}
-            img2={useImage('obb14/img4obb14.png')}
-            img3={useImage('obb14/img4obb14.png')}
+            img1={useImage('obb14/img5obb14.jpg')}
+            img2={useImage('obb14/img6obb14.jpg')}
+            img3={useImage('obb14/img7obb14.jpg')}
+            img4={useImage('obb14/img8obb14.jpg')}
+            text1="14.1: Entro il 2025, prevenire e ridurre 
+            in modo significativo ogni forma di inquinamento marino, in particolar modo quello derivante da attività esercitate sulla terraferma, compreso l'inquinamento dei detriti marini e delle sostanze nutritive."
+            text2="14.2: Entro il 2020, gestire in modo sostenibile e proteggere l'ecosistema marino e costiero per evitare impatti particolarmente negativi, anche rafforzando la loro resilienza, e agire per il loro ripristino in modo da ottenere oceani salubri e produttivi."
+            text3="14.3: Ridurre al minimo e affrontare gli effetti dell'acidificazione degli oceani, anche attraverso una maggiore collaborazione scientifica su tutti i livelli."
+            text4="14.4: Entro il 2020, regolare in modo efficace la pesca e porre termine alla pesca eccessiva, illegale, non dichiarata e non regolamentata e ai metodi di pesca distruttivi. Implementare piani di gestione su base scientifica, così da ripristinare nel minor tempo possibile le riserve ittiche, riportandole almeno a livelli che producano il massimo rendimento sostenibile, come determinato dalle loro caratteristiche biologiche."
+            text5="14.5: Entro il 2020, preservare almeno il 10% delle aree costiere e marine, in conformità al diritto nazionale e internazionale e basandosi sulle informazioni scientifiche disponibili più accurate.
+            14.6: Entro il 2020, vietare quelle forme di sussidi alla pesca che contribuiscono a un eccesso di capacità e alla pesca eccessiva, eliminare i sussidi che contribuiscono alla pesca illegale, non dichiarata e non regolamentata e astenersi dal reintrodurre tali sussidi, riconoscendo che il trattamento speciale e differenziato per i paesi in via di sviluppo e per quelli meno sviluppati che sia appropriato ed efficace, dovrebbe essere parte integrante dei negoziati per i sussidi alla pesca dell'Organizzazione Mondiale del Commercio."
+            text6="14.7: Entro il 2030, aumentare i benefici economici dei piccoli stati insulari in via di sviluppo e dei paesi meno sviluppati, facendo ricorso a un utilizzo più sostenibile delle risorse marine, compresa la gestione sostenibile della pesca, dell'acquacoltura e del turismo.
+
+            14.a: Aumentare la conoscenza scientifica, sviluppare la capacità di ricerca e di trasmissione della tecnologia marina, tenendo in considerazione i criteri e le linee guida della Commissione Oceanografica Intergovernativa sul Trasferimento di Tecnologia Marina, con lo scopo di migliorare la salute dell'oceano e di aumentare il contributo della biodiversità marina allo sviluppo dei paesi emergenti, in particolar modo dei piccoli stati insulari in via di sviluppo e dei paesi meno sviluppati."
+            text7="14.b: Fornire l'accesso ai piccoli pescatori artigianali alle risorse e ai mercati marini.
+
+            14.c: Potenziare la conservazione e l'utilizzo sostenibile degli oceani e delle loro risorse applicando il diritto internazionale, come riportato nella Convenzione delle Nazioni Unite sul Diritto del Mare, che fornisce il quadro legale per la conservazione e per l'utilizzo sostenibile degli oceani e delle loro risorse, come riferito nel paragrafo 158 de Il futuro che vogliamo."
         >
-            ProvaProva
+            I sottobiettivi
         </ObjectiveGrid>
     </Page>
 );
