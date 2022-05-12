@@ -13,12 +13,12 @@ import ObjectiveGrid from '~/components/objective/ObjectiveGrid';
 
 const Obiettivo14: React.FC = () => (
     <Page title="Obiettivo 14 | InterculturaMarconi" background="#045389">
-        {/* <ObjectiveCover img={useImage('obb14/img1obb14.jpg')} id={14}>
+        <ObjectiveCover img={useImage('obb14/img1obb14.jpg')} id={14}>
             <div>
                 <strong>Obiettivo 14</strong>
             </div>
             <div>Conservare e utilizzare in modo durevole gli oceani</div>
-        </ObjectiveCover> */}
+        </ObjectiveCover>
         <Box sx={{ py: 4, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
             <ObjectiveCard img={useImage('obb14/img2obb14.png')}>
                 <Typography variant="body1" gutterBottom sx={{ xs: 'center', md: 'left' }}>
