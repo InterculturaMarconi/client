@@ -19,9 +19,9 @@ const Obiettivo14: React.FC = () => (
             </div>
             <div>Conservare e utilizzare in modo durevole gli oceani</div>
         </ObjectiveCover>
-        <Box sx={{ py: 4 }}>
+        <Box sx={{ py: 4, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
             <ObjectiveCard img={useImage('obb14/img2obb14.png')}>
-                <Typography variant="body1" gutterBottom>
+                <Typography variant="body1" gutterBottom sx={{ xs: 'center', md: 'left' }}>
                     Gli <strong>oceani del mondo</strong> - la loro temperatura, la loro
                     composizione chimica, le loro correnti e la loro vita -{' '}
                     <strong>
@@ -65,7 +65,7 @@ const Obiettivo14: React.FC = () => (
             </ObjectiveCaption>
         </Box>
         <ObjectiveBanner img={useImage('obb14/img3obb14.png')} title="- Scopriamo l'obiettivo! -" />
-        <Box sx={{ py: 8 }}>
+        <Box sx={{ py: 4, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
             <ObjectiveCard img={useImage('obb14/img4obb14.png')}>
                 <Box
                     sx={{
@@ -95,9 +95,9 @@ const Obiettivo14: React.FC = () => (
                 </Box>
             </ObjectiveCard>
         </Box>
-        <Container sx={{ mt: 5 }}>
+        {/* <Container sx={{ mt: 5 }}>
             <ReactPlayer url="https://www.youtube.com/watch?v=CcNWGKsCSTc" />
-        </Container>
+        </Container> */}
         <ObjectiveGrid
             img1={useImage('obb14/img5obb14.jpg')}
             img2={useImage('obb14/img6obb14.jpg')}

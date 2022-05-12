@@ -21,6 +21,13 @@ const createThemeMode = (mode: PaletteMode) =>
                     html, body {
                         height: 100%;
                     }
+
+                    #root {
+                        display: flex;
+                        min-height: 100vh;
+                        flex-direction: column;
+                        justify-content: flex-start;
+                    }
                 `,
             },
         },

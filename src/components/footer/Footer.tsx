@@ -44,10 +44,7 @@ const Footer: React.FC = () => {
         <Box
             sx={{
                 backgroundColor: theme.palette.mode === 'dark' ? '#39393D' : '#007bb8',
-                position: 'relative',
-                bottom: 0,
-                left: 0,
-                right: 0,
+                mt: 'auto',
                 width: '100%',
                 height: 'max-content',
                 py: 13,
