@@ -13,12 +13,12 @@ import ObjectiveGrid from '~/components/objective/ObjectiveGrid';
 
 const Obiettivo14: React.FC = () => (
     <Page title="Obiettivo 14 | InterculturaMarconi" background="#045389">
-        <ObjectiveCover img={useImage('obb14/img1obb14.jpg')} id={14}>
+        {/* <ObjectiveCover img={useImage('obb14/img1obb14.jpg')} id={14}>
             <div>
                 <strong>Obiettivo 14</strong>
             </div>
             <div>Conservare e utilizzare in modo durevole gli oceani</div>
-        </ObjectiveCover>
+        </ObjectiveCover> */}
         <Box sx={{ py: 4, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
             <ObjectiveCard img={useImage('obb14/img2obb14.png')}>
                 <Typography variant="body1" gutterBottom sx={{ xs: 'center', md: 'left' }}>
@@ -39,31 +39,34 @@ const Obiettivo14: React.FC = () => (
                 </Typography>
             </ObjectiveCard>
         </Box>
-        <Box sx={{ p: 4 }}>
-            <ObjectiveCaption title="La vita sott'acqua">
+        <ObjectiveCaption sx={{ p: 4 }}>
+            <Typography variant="h2" gutterBottom textAlign="center">
+                La vita sott'acqua
+            </Typography>
+            <Typography variant="body1" sx={{ mb: 4 }} textAlign="center">
                 Se ci chiedessero di riconoscere la Terra a colpo d'occhio, dallo Spazio, non
                 avremmo dubbi: gli oceani conferiscono a quel nostro "puntino blu" un look
                 inconfondibile che tutti gli altri pianeti ci invidiano.
                 <strong> Mari ed oceani</strong> in salute sono indispensabili per la sopravvivenza
                 dell'uomo: da queste distese d'acqua che coprono i tre quarti del pianeta attingiamo
                 cibo, energia, acqua, ossigeno.
-                <br />
-                <br />
+            </Typography>
+            <Typography variant="body1" sx={{ mb: 4 }} textAlign="center">
                 Eppure, da qualche tempo la loro <strong> protezione</strong> sembra esserci...
                 sfuggita di mano. Negli ultimi decenni ci siamo lasciati andare a forme di{' '}
                 <strong>inquinamento</strong> ed incuria degli oceani che minacciano la
                 sopravvivenza delle 200.000 specie viventi che vi abitano, e alla lunga anche la
                 nostra.
-                <br />
-                <br />
+            </Typography>
+            <Typography variant="body1" textAlign="center">
                 Per fortuna, <strong>l'Obiettivo 14 dell'Agenda 2030</strong> (una lista di sfide in
                 cui lanciarci per migliorare il futuro del Pianeta) ci ricorda che dobbiamo
                 rimboccarci le maniche per <strong>proteggere gli oceani</strong> e{' '}
                 <strong>utilizzare le risorse</strong> che ci offrono{' '}
                 <strong>in modo sostenibile</strong>, cioè con intelligenza e misura, in modo non
                 distruttivo.
-            </ObjectiveCaption>
-        </Box>
+            </Typography>
+        </ObjectiveCaption>
         <ObjectiveBanner img={useImage('obb14/img3obb14.png')} title="- Scopriamo l'obiettivo! -" />
         <Box sx={{ py: 4, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
             <ObjectiveCard img={useImage('obb14/img4obb14.png')}>

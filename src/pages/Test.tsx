@@ -1,5 +1,6 @@
 import { Box, Typography } from '@mui/material';
 import React from 'react';
+import ObjectiveCaption from '~/components/objective/ObjectiveCaption';
 import ObjectiveCard from '~/components/objective/ObjectiveCard';
 import { useImage } from '~/hooks/Image';
 
@@ -15,24 +16,34 @@ const Test: React.FC = () => {
                 height: '100%',
             }}
         >
-            <ObjectiveCard img={useImage('obb14/img2obb14.png')}>
-                <Typography variant="body1">
-                    Gli <strong>oceani del mondo</strong> - la loro temperatura, la loro
-                    composizione chimica, le loro correnti e la loro vita -{' '}
-                    <strong>
-                        influenzano i sistemi globali che rendono la Terra un luogo vivibile per il
-                        genere umano.
-                    </strong>
-                    L'acqua piovana, l'acqua che beviamo, il clima, le nostre coste, molto del
-                    nostro cibo e persino l'ossigeno presente nell'aria che respiriamo sono{' '}
-                    <strong>elementi</strong> in definitiva forniti e{' '}
-                    <strong>regolati dal mare.</strong>
-                    Nel corso della storia, gli oceani e i mari sono stati e continuano ad essere
-                    canali vitali per il commercio ed il trasporto.
-                    <strong>Un'attenta gestione</strong> di questa fondamentale risorsa globale è
-                    alla base di un <strong>futuro sostenibile.</strong>
+            <ObjectiveCaption>
+                <Typography variant="h2" gutterBottom>
+                    La vita sott'acqua
                 </Typography>
-            </ObjectiveCard>
+                <Typography variant="body1" sx={{ mb: 4 }} textAlign="center">
+                    Se ci chiedessero di riconoscere la Terra a colpo d'occhio, dallo Spazio, non
+                    avremmo dubbi: gli oceani conferiscono a quel nostro "puntino blu" un look
+                    inconfondibile che tutti gli altri pianeti ci invidiano.
+                    <strong> Mari ed oceani</strong> in salute sono indispensabili per la
+                    sopravvivenza dell'uomo: da queste distese d'acqua che coprono i tre quarti del
+                    pianeta attingiamo cibo, energia, acqua, ossigeno.
+                </Typography>
+                <Typography variant="body1" sx={{ mb: 4 }} textAlign="center">
+                    Eppure, da qualche tempo la loro <strong> protezione</strong> sembra esserci...
+                    sfuggita di mano. Negli ultimi decenni ci siamo lasciati andare a forme di{' '}
+                    <strong>inquinamento</strong> ed incuria degli oceani che minacciano la
+                    sopravvivenza delle 200.000 specie viventi che vi abitano, e alla lunga anche la
+                    nostra.
+                </Typography>
+                <Typography variant="body1" textAlign="center">
+                    Per fortuna, <strong>l'Obiettivo 14 dell'Agenda 2030</strong> (una lista di
+                    sfide in cui lanciarci per migliorare il futuro del Pianeta) ci ricorda che
+                    dobbiamo rimboccarci le maniche per <strong>proteggere gli oceani</strong> e{' '}
+                    <strong>utilizzare le risorse</strong> che ci offrono{' '}
+                    <strong>in modo sostenibile</strong>, cioè con intelligenza e misura, in modo
+                    non distruttivo.
+                </Typography>
+            </ObjectiveCaption>
         </Box>
     );
 };

@@ -1,35 +1,28 @@
 import * as React from 'react';
-import { useTheme } from '@mui/material/styles';
-import Box from '@mui/material/Box';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-import Typography from '@mui/material/Typography';
-import { Container } from '@mui/material';
-import { Grid } from '@mui/material';
+import { Box, Container, SxProps } from '@mui/material';
 import Divider from '@mui/material/Divider';
+import { Theme } from '@mui/system';
 
 export interface IObjectiveCaption {
-    title: string;
+    sx?: SxProps<Theme>;
     children: React.ReactNode;
 }
 
-const ObjectiveCaption: React.FC<IObjectiveCaption> = ({ children, title }) => {
+const ObjectiveCaption: React.FC<IObjectiveCaption> = ({ children, sx }) => {
     return (
-        <Container fixed>
+        <Container fixed sx={sx}>
             <Divider variant="middle" color="white" />
-            <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-                <CardContent sx={{ flex: '1 0 auto' }}>
-                    <Grid container spacing={1} alignItems="center" justifyContent="center">
-                        <Typography component="div" variant="h2" color="white" gutterBottom>
-                            {title}
-                        </Typography>
-                        <Box width={900} sx={{ marginX: '4em' }}>
-                            <Typography component="div" variant="body1" color="white">
-                                {children}
-                            </Typography>
-                        </Box>
-                    </Grid>
-                </CardContent>
+            <Box
+                sx={{
+                    py: 4,
+                    px: 5,
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                }}
+            >
+                {children}
             </Box>
             <Divider variant="middle" color="white" />
         </Container>
