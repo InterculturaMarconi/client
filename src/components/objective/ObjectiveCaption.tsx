@@ -1,14 +1,14 @@
-import * as React from 'react';
 import { Box, Container, SxProps } from '@mui/material';
 import Divider from '@mui/material/Divider';
 import { Theme } from '@mui/system';
 
 export interface IObjectiveCaption {
     sx?: SxProps<Theme>;
+    title: string;
     children: React.ReactNode;
 }
 
-const ObjectiveCaption: React.FC<IObjectiveCaption> = ({ children, sx }) => {
+const ObjectiveCaption: React.FC<IObjectiveCaption> = ({ children, sx, title }) => {
     return (
         <Container fixed sx={sx}>
             <Divider variant="middle" color="white" />

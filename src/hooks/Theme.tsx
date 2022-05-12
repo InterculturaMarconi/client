@@ -18,13 +18,13 @@ const createThemeMode = (mode: PaletteMode) =>
         components: {
             MuiCssBaseline: {
                 styleOverrides: `
-                    html, body {
+                    html, body, #root {
                         height: 100%;
                     }
 
                     #root {
-                        display: flex;
                         min-height: 100vh;
+                        display: flex;
                         flex-direction: column;
                         justify-content: flex-start;
                     }

@@ -39,7 +39,7 @@ const Obiettivo14: React.FC = () => (
                 </Typography>
             </ObjectiveCard>
         </Box>
-        <ObjectiveCaption sx={{ p: 4 }}>
+        <ObjectiveCaption sx={{ p: 4, color: 'white' }} title="La vita sott'acqua">
             <Typography variant="h2" gutterBottom textAlign="center">
                 La vita sott'acqua
             </Typography>
@@ -67,7 +67,7 @@ const Obiettivo14: React.FC = () => (
                 distruttivo.
             </Typography>
         </ObjectiveCaption>
-        <ObjectiveBanner img={useImage('obb14/img3obb14.png')} title="- Scopriamo l'obiettivo! -" />
+        <ObjectiveBanner img={useImage('obb14/img3obb14.png')} title="Scopriamo l'obiettivo!" />
         <Box sx={{ py: 4, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
             <ObjectiveCard img={useImage('obb14/img4obb14.png')}>
                 <Box
