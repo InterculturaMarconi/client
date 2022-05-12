@@ -25,26 +25,29 @@ import { useImage } from './hooks/Image';
 
 const App: React.FC = () => (
     <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/obiettivo/1" element={<Obiettivo1 />} />
-        <Route path="/obiettivo/2" element={<Obiettivo1 />} />
-        <Route path="/obiettivo/3" element={<Obiettivo1 />} />
-        <Route path="/obiettivo/4" element={<Obiettivo1 />} />
-        <Route path="/obiettivo/5" element={<Obiettivo1 />} />
-        <Route path="/obiettivo/6" element={<Obiettivo1 />} />
-        <Route path="/obiettivo/7" element={<Obiettivo1 />} />
-        <Route path="/obiettivo/8" element={<Obiettivo1 />} />
-        <Route path="/obiettivo/9" element={<Obiettivo1 />} />
-        <Route path="/obiettivo/10" element={<Obiettivo1 />} />
-        <Route path="/obiettivo/11" element={<Obiettivo1 />} />
-        <Route path="/obiettivo/12" element={<Obiettivo1 />} />
-        <Route path="/obiettivo/13" element={<Obiettivo1 />} />
-        <Route path="/obiettivo/14" element={<Obiettivo14 />} />
-        <Route path="/obiettivo/15" element={<Obiettivo1 />} />
-        <Route path="/obiettivo/16" element={<Obiettivo1 />} />
-        <Route path="/obiettivo/17" element={<Obiettivo1 />} />
-        <Route path="/obiettivo/18" element={<Obiettivo1 />} />
-
+        <Route path="/">
+            <Route index element={<Home />} />
+            <Route path="obiettivo">
+                <Route path="1" element={<Obiettivo1 />} />
+                <Route path="2" element={<Obiettivo1 />} />
+                <Route path="3" element={<Obiettivo1 />} />
+                <Route path="4" element={<Obiettivo1 />} />
+                <Route path="5" element={<Obiettivo1 />} />
+                <Route path="6" element={<Obiettivo1 />} />
+                <Route path="7" element={<Obiettivo1 />} />
+                <Route path="8" element={<Obiettivo1 />} />
+                <Route path="9" element={<Obiettivo1 />} />
+                <Route path="10" element={<Obiettivo1 />} />
+                <Route path="11" element={<Obiettivo1 />} />
+                <Route path="12" element={<Obiettivo1 />} />
+                <Route path="13" element={<Obiettivo1 />} />
+                <Route path="14" element={<Obiettivo14 />} />
+                <Route path="15" element={<Obiettivo1 />} />
+                <Route path="16" element={<Obiettivo1 />} />
+                <Route path="17" element={<Obiettivo1 />} />
+                <Route path="18" element={<Obiettivo1 />} />
+            </Route>
+        </Route>
         {/* <Route path="/test" element={<ObjectiveBanner img={useImage("obb14/img3obb14.png")} title="- Scopriamo l'obiettivo! -" />} /> */}
     </Routes>
 );
