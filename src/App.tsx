@@ -16,6 +16,7 @@ import Obiettivo1 from '~/pages/obiettivo/Obiettivo1';
 // import Obiettivo12 from '~/pages/Obiettivo12';
 // import Obiettivo13 from '~/pages/Obiettivo13';
 import Obiettivo14 from '~/pages/obiettivo/Obiettivo14';
+import Login from './pages/Login';
 import Test from './pages/Test';
 // import Obiettivo15 from '~/pages/Obiettivo15';
 // import Obiettivo16 from '~/pages/Obiettivo16';
@@ -26,7 +27,7 @@ const App: React.FC = () => (
     <Routes>
         <Route path="/">
             <Route index element={<Home />} />
-            <Route path="login" element={<Home />} />
+            <Route path="login" element={<Login />} />
             <Route path="register" element={<Home />} />
             <Route path="obiettivo">
                 <Route path="1" element={<Obiettivo1 />} />
