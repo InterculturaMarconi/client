@@ -12,14 +12,16 @@ const ObjectiveBanner: React.FC<IObjectiveBanner> = ({ title, img }) => {
         <Box
             sx={{
                 width: '100%',
-                height: '40vh',
                 backgroundImage: `url('${img}')`,
                 backgroundSize: 'cover',
                 backgroundRepeat: 'no-repeat',
                 backgroundPosition: 'center',
             }}
         >
-            <Filter opacity={0.3} sx={{ justifyContent: 'center', alignItems: 'center', px: 2 }}>
+            <Filter
+                opacity={0.3}
+                sx={{ justifyContent: 'center', alignItems: 'center', height: '40vh', px: 2 }}
+            >
                 <Typography variant="h2" color="white" textAlign="center">
                     {title}
                 </Typography>

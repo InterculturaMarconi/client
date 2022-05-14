@@ -9,14 +9,16 @@ interface IObjectiveCover {
     children: React.ReactNode;
 }
 
-const Image = styled('img')`
-    width: 9rem;
-    height: 9rem;
-    border-radius: 0.25rem;
-
-    z-index: 4;
-`;
-
+const Image = styled('img')(({ theme }) => ({
+    width: theme.spacing(12),
+    height: theme.spacing(12),
+    borderRadius: theme.spacing(1),
+    zIndex: 4,
+    [theme.breakpoints.up('sm')]: {
+        width: theme.spacing(20),
+        height: theme.spacing(20),
+    },
+}));
 const ObjectiveCover: React.FC<IObjectiveCover> = ({ children, img, id }) => {
     return (
         <Box
@@ -29,7 +31,14 @@ const ObjectiveCover: React.FC<IObjectiveCover> = ({ children, img, id }) => {
                 backgroundPosition: 'center',
             }}
         >
-            <Filter opacity={0.1}>
+            <Filter
+                opacity={0.1}
+                sx={{
+                    display: 'flex',
+                    flexDirection: { xs: 'column-reverse', sm: 'row' },
+                    p: { xs: 2, sm: 3 },
+                }}
+            >
                 <Grid
                     container
                     justifyContent="flex-end"
@@ -43,7 +52,6 @@ const ObjectiveCover: React.FC<IObjectiveCover> = ({ children, img, id }) => {
                         height: '100%',
                         zIndex: 100,
                         color: 'white',
-                        p: '0 0 2rem 2rem',
                     }}
                 >
                     <Grid item>
@@ -61,9 +69,7 @@ const ObjectiveCover: React.FC<IObjectiveCover> = ({ children, img, id }) => {
                         </Filter>
                     </Grid>
                 </Grid>
-                <Box sx={{ pr: 4, pt: 4 }}>
-                    <Image src={useImage(`obbiettivi/${id}.jpg`)} alt="" />
-                </Box>
+                <Image src={useImage(`obbiettivi/${id}.jpg`)} alt="" />
             </Filter>
         </Box>
     );

@@ -21,7 +21,8 @@ const Page: React.FC<IPage> = ({ children, title, background }) => {
     return (
         <>
             <Navbar />
-            <Main background={background}>{children}</Main>
+            {/* <Main background={background}>{children}</Main> */}
+            {children}
             <Footer />
         </>
     );

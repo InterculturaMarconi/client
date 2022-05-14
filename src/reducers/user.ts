@@ -1,4 +1,4 @@
-import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { RootState } from '~/hooks/Store';
 
 interface IUser {
@@ -13,6 +13,7 @@ interface IUser {
 interface UserState {
     entity: IUser | null;
     status: 'pending' | 'succeeded' | 'failed';
+    message?: string;
 }
 
 const initialState: UserState = {
@@ -29,12 +30,12 @@ interface IRegister {
 }
 
 const SignUp = createAsyncThunk('user/signup', async (payload: IRegister, api) => {
-    const res = await fetch('', {
+    const res = await fetch('http://pcto.localhost/register.php', {
         method: 'POST',
-        headers: {
-            Accept: 'application/json',
-            'Content-Type': 'application/json',
-        },
+        // headers: {
+        //  Accept: 'application/json',
+        // 'Content-Type': 'application/json',
+        // },
         body: JSON.stringify(payload),
     });
 
@@ -54,20 +55,44 @@ interface ILogin {
 }
 
 export const SignIn = createAsyncThunk('user/signin', async (payload: ILogin, api) => {
-    const res = await fetch('', {
+    const res = await fetch('http://pcto.localhost/login.php', {
         method: 'POST',
-        headers: {
-            Accept: 'application/json',
-            'Content-Type': 'application/json',
-        },
+        // headers: {
+        //      Accept: 'application/json',
+        //     'Content-Type': 'application/json',
+        // },
         body: JSON.stringify(payload),
     });
 
-    const data = await res.json();
+    const { message, data } = await res.json();
+
     if (res.status === 200) {
         localStorage.setItem('auth-token', data.token);
-
         return { ...data.user };
+    }
+
+    api.rejectWithValue(message);
+});
+
+export const Fetch = createAsyncThunk('user/fetch', async (payload, api) => {
+    const state = api.getState() as UserState;
+    if (state.entity) {
+        return state.entity;
+    }
+
+    const res = await fetch('http://pcto.localhost/users/user.php', {
+        method: 'GET',
+        headers: {
+            //     Accept: 'application/json',
+            //     'Content-Type': 'application/json',
+            authorization: `Bearer ${localStorage.getItem('auth-token')}`,
+        },
+    });
+
+    const { data } = await res.json();
+
+    if (res.status === 200) {
+        return { ...data };
     }
 
     api.rejectWithValue(data.message);
@@ -102,11 +127,25 @@ export const UserSlice = createSlice({
             state.entity = action.payload;
         });
 
-        builder.addCase(SignIn.rejected, state => {
+        builder.addCase(SignIn.rejected, (state, action) => {
             state.status = 'failed';
+            state.message = action.payload as string;
         });
 
         builder.addCase(SignIn.pending, state => {
+            state.status = 'pending';
+        });
+
+        builder.addCase(Fetch.fulfilled, (state, action) => {
+            state.status = 'succeeded';
+            state.entity = action.payload;
+        });
+
+        builder.addCase(Fetch.rejected, state => {
+            state.status = 'failed';
+        });
+
+        builder.addCase(Fetch.pending, state => {
             state.status = 'pending';
         });
     },

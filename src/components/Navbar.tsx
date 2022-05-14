@@ -11,15 +11,18 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-import AdbIcon from '@mui/icons-material/Adb';
 import LogoMarconi from '~/img/Logo_Marconi_Vet.svg';
 
 import PaletteModeButton from '~/components/PaletteModeButton';
+import { useSelector } from '~/hooks/Store';
+import { getUser } from '~/reducers/user';
 
 const pages = ['Products', 'Pricing', 'Blog'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 const Navbar = () => {
+    const user = useSelector(getUser);
+
     const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
     const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
 
@@ -142,9 +145,16 @@ const Navbar = () => {
                     </Box>
                     <Box sx={{ flexGrow: 0 }}>
                         <Tooltip title="Open settings">
-                            <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-                            </IconButton>
+                            {user.entity ? (
+                                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                                    <Avatar
+                                        alt={`${user.entity.nome} ${user.entity.cognome}`}
+                                        src="static/images/avatar/2.jpg"
+                                    />
+                                </IconButton>
+                            ) : (
+                                <Button>Entra</Button>
+                            )}
                         </Tooltip>
                         <Menu
                             sx={{ mt: '45px' }}
