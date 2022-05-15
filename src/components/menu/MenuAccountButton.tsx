@@ -23,11 +23,11 @@ const MenuAccountButton: React.FC = () => {
     const user = useSelector(getUser);
 
     if (!user.entity) {
-        return <StyledLink to="/login">ENTRA</StyledLink>;
+        return <StyledLink to="/login">ACCEDI</StyledLink>;
     }
 
     return (
-        <Tooltip title="Open settings">
+        <Tooltip title="Vai al profilo">
             <IconButton component="a" href="/profile" sx={{ p: 0 }}>
                 <Avatar
                     alt={`${user.entity.nome} ${user.entity.cognome}`}

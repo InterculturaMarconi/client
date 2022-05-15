@@ -13,7 +13,7 @@ interface IUser {
 interface UserState {
     entity: IUser | null;
     status: 'pending' | 'succeeded' | 'failed';
-    message?: string;
+    error?: string;
 }
 
 const initialState: UserState = {
@@ -29,7 +29,11 @@ interface IRegister {
     propic?: string;
 }
 
-const SignUp = createAsyncThunk('user/signup', async (payload: IRegister, api) => {
+export const enum RegisterError {
+    EXISTS = 'User already exists.',
+}
+
+export const SignUp = createAsyncThunk('user/signup', async (payload: IRegister, api) => {
     const res = await fetch('http://pcto.localhost/register.php', {
         method: 'POST',
         // headers: {
@@ -39,14 +43,13 @@ const SignUp = createAsyncThunk('user/signup', async (payload: IRegister, api) =
         body: JSON.stringify(payload),
     });
 
-    const data = await res.json();
-    if (res.status === 200) {
+    const { message, data } = await res.json();
+    if (res.status === 201) {
         localStorage.setItem('auth-token', data.token);
-
         return { ...data.user };
     }
 
-    api.rejectWithValue(data.message);
+    return api.rejectWithValue(message);
 });
 
 interface ILogin {
@@ -71,7 +74,7 @@ export const SignIn = createAsyncThunk('user/signin', async (payload: ILogin, ap
         return { ...data.user };
     }
 
-    api.rejectWithValue(message);
+    return api.rejectWithValue(message);
 });
 
 export const Fetch = createAsyncThunk('user/fetch', async (payload, api) => {
@@ -89,13 +92,13 @@ export const Fetch = createAsyncThunk('user/fetch', async (payload, api) => {
         },
     });
 
-    const { data } = await res.json();
+    const { data, message } = await res.json();
 
     if (res.status === 200) {
         return { ...data };
     }
 
-    api.rejectWithValue(data.message);
+    return api.rejectWithValue(message);
 });
 
 export const UserSlice = createSlice({
@@ -114,8 +117,9 @@ export const UserSlice = createSlice({
             state.entity = action.payload;
         });
 
-        builder.addCase(SignUp.rejected, state => {
+        builder.addCase(SignUp.rejected, (state, action) => {
             state.status = 'failed';
+            state.error = action.payload as string;
         });
 
         builder.addCase(SignUp.pending, state => {
@@ -129,7 +133,7 @@ export const UserSlice = createSlice({
 
         builder.addCase(SignIn.rejected, (state, action) => {
             state.status = 'failed';
-            state.message = action.payload as string;
+            state.error = action.payload as string;
         });
 
         builder.addCase(SignIn.pending, state => {
@@ -141,8 +145,9 @@ export const UserSlice = createSlice({
             state.entity = action.payload;
         });
 
-        builder.addCase(Fetch.rejected, state => {
+        builder.addCase(Fetch.rejected, (state, action) => {
             state.status = 'failed';
+            state.error = action.payload as string;
         });
 
         builder.addCase(Fetch.pending, state => {

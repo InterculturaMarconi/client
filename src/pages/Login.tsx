@@ -75,7 +75,7 @@ const Login: React.FC = () => {
                         <LockOutlinedIcon />
                     </Avatar>
                     <Typography component="h1" variant="h5" fontWeight={500}>
-                        Entra
+                        Accedi
                     </Typography>
                     <Box component="form" onSubmit={onSubmit} noValidate sx={{ mt: 1 }}>
                         <TextField
@@ -101,9 +101,9 @@ const Login: React.FC = () => {
                             Entra
                         </Button>
                         <Grid container sx={{ mt: 2 }}>
-                            <Grid item xs>
+                            {/* <Grid item xs>
                                 <StyledLink to="/">Password dimenticata?</StyledLink>
-                            </Grid>
+                            </Grid> */}
                             <Grid item>
                                 <StyledLink to="/register">
                                     Non hai un account? Iscriviti.

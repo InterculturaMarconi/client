@@ -93,7 +93,7 @@ const Menu: React.FC = () => {
                                 <MenuIconButton />
                                 <Box sx={{ display: 'flex', gap: 3 }}>
                                     {pages.map(page => (
-                                        <StyledLink to={page.path} reloadDocument>
+                                        <StyledLink to={page.path} reloadDocument key={page.name}>
                                             {page.name.toUpperCase()}
                                         </StyledLink>
                                     ))}

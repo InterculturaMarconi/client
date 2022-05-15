@@ -8,6 +8,7 @@ import { useDispatcher, useSelector } from '~/hooks/Store';
 import { getUser, Fetch } from '~/reducers/user';
 import Login from './pages/Login';
 import Test from './pages/Test';
+import Register from './pages/Register';
 
 const App: React.FC = () => {
     const user = useSelector(getUser);
@@ -24,7 +25,7 @@ const App: React.FC = () => {
             <Route path="/">
                 <Route index element={<Home />} />
                 <Route path="login" element={<Login />} />
-                <Route path="register" element={<Home />} />
+                <Route path="register" element={<Register />} />
                 <Route path="obiettivo">
                     <Route path="1" element={<Obiettivo1 />} />
                     <Route path="2" element={<Obiettivo1 />} />
