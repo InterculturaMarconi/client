@@ -59,7 +59,7 @@ const ObjectivePage: React.FC<IObjectivePage> = ({
                     </Typography>
                 </ObjectiveCard>
             </Box>
-            <ObjectiveCaption sx={{ p: 4, color: 'white' }} title={sottotitolo_1}>
+            <ObjectiveCaption sx={{ p: 4 }} title={sottotitolo_1}>
                 <Typography variant="h2" gutterBottom textAlign="center">
                     {sottotitolo_1}
                 </Typography>

@@ -12,12 +12,14 @@ import ObjectiveCaption from '~/components/objective/ObjectiveCaption';
 
 const Obiettivo14: React.FC = () => (
     <Page title="Obiettivo 14 | InterculturaMarconi" background="#045389">
-        <ObjectiveCover img={useImage('obb14/img1obb14.jpg')} id={14}>
-            <div>
-                <strong>Obiettivo 14</strong>
-            </div>
-            <div>Conservare e utilizzare in modo durevole gli oceani</div>
-        </ObjectiveCover>
+        <Box>
+            <ObjectiveCover img={useImage('obb14/img1obb14.jpg')} id={14}>
+                <div>
+                    <strong>Obiettivo 14</strong>
+                </div>
+                <div>Conservare e utilizzare in modo durevole gli oceani</div>
+            </ObjectiveCover>
+        </Box>
         <Box sx={{ py: 4, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
             <ObjectiveCard img={useImage('obb14/img2obb14.png')}>
                 <Typography variant="body1" gutterBottom sx={{ xs: 'center', md: 'left' }}>
@@ -38,7 +40,7 @@ const Obiettivo14: React.FC = () => (
                 </Typography>
             </ObjectiveCard>
         </Box>
-        <ObjectiveCaption sx={{ p: 4, color: 'white' }} title="La vita sott'acqua">
+        <ObjectiveCaption sx={{ p: 4 }} title="La vita sott'acqua">
             <Typography variant="h2" gutterBottom textAlign="center">
                 La vita sott'acqua
             </Typography>
