@@ -1,3 +1,4 @@
+import React from 'react';
 import {
     Box,
     Button,
@@ -10,12 +11,13 @@ import {
     Avatar,
     Alert,
 } from '@mui/material';
-import React from 'react';
 import { useLocation, useNavigate, Location, Link } from 'react-router-dom';
-import Page from '~/components/Page';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import { useForm } from 'react-hook-form';
+
+import Page from '~/components/Page';
 import { useDispatcher, useSelector } from '~/hooks/Store';
-import { getUser, RegisterError, SignUp } from '~/reducers/user';
+import { getUser, IRegister, UserError, SignUp } from '~/reducers/user';
 
 const StyledLink = styled(Link)(({ theme }) => ({
     color: theme.palette.primary.main,
@@ -40,44 +42,32 @@ const Register: React.FC = () => {
     const dispatch = useDispatcher();
     const user = useSelector(getUser);
 
-    const [isAllValid, setAllValid] = React.useState(true);
-    const [isEmailValid, setEmailValid] = React.useState(true);
-    const [emailHelp, setEmailHelp] = React.useState('');
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+        setError,
+    } = useForm<IRegister>();
 
     const from = location.state?.from?.pathname ?? '/';
 
     React.useEffect(() => {
-        if (user.status === 'succeeded' && user.entity) {
+        if (user.status === 'loged') {
             navigate(from, { replace: true });
         }
 
-        if (user.status === 'failed' && user.error === RegisterError.EXISTS) {
-            setEmailValid(false);
-            setEmailHelp('Questa email è già in uso.');
+        if (user.status === 'failed' && user.error === UserError.ALREADY_REGISTERED) {
+            setError('email', { type: 'manual', message: 'Questa email è già stata utilizzata!' });
         }
     }, [user.status]);
 
-    const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-        event.preventDefault();
-
-        const data = new FormData(event.currentTarget);
-
-        const nome = data.get('nome') as string;
-        const cognome = data.get('cognome') as string;
-        const email = data.get('email') as string;
-        const password = data.get('password') as string;
-
-        if ([nome, cognome, email, password].some(x => !x)) {
-            setAllValid(false);
-            return;
-        }
-
-        dispatch(SignUp({ nome, cognome, email, password }));
+    const onSubmit = async (data: IRegister) => {
+        dispatch(SignUp(data));
     };
 
     return (
         <Page title="Registrazione | InterculturaMarconi">
-            <Container maxWidth="md" sx={{ my: 10 }}>
+            <Container maxWidth="sm" sx={{ my: 10 }}>
                 <Paper
                     sx={{
                         display: 'flex',
@@ -94,64 +84,86 @@ const Register: React.FC = () => {
                     <Typography component="h1" variant="h5" fontWeight={500}>
                         Registrazione
                     </Typography>
-                    {!isAllValid && (
-                        <Alert
-                            severity="error"
-                            sx={{
-                                my: 2,
-                            }}
-                        >
-                            Devi inserire tutti campi obligatori!
-                        </Alert>
-                    )}
-                    <Box component="form" onSubmit={onSubmit} noValidate sx={{ mt: 0 }}>
+                    <Box
+                        component="form"
+                        onSubmit={handleSubmit(onSubmit)}
+                        noValidate
+                        sx={{ mt: 1 }}
+                    >
                         <Grid container spacing={{ xs: 0, md: 2 }}>
                             <Grid item xs={12} md={6}>
                                 <TextField
-                                    required
                                     fullWidth
-                                    id="nome"
                                     label="Nome"
-                                    name="nome"
                                     autoComplete="nome"
                                     sx={{ my: 1 }}
-                                    error={!isAllValid}
+                                    required
+                                    error={!!errors.nome}
+                                    helperText={errors.nome?.message || ' '}
+                                    {...register('nome', {
+                                        required: {
+                                            value: true,
+                                            message: 'Questo campo è obbligatorio.',
+                                        },
+                                    })}
                                 />
                             </Grid>
                             <Grid item xs={12} md={6}>
                                 <TextField
-                                    required
                                     fullWidth
-                                    id="cognome"
                                     label="Cognome"
-                                    name="cognome"
                                     autoComplete="cognome"
+                                    required
                                     sx={{ my: 1 }}
-                                    error={!isAllValid}
+                                    error={!!errors.cognome}
+                                    helperText={errors.cognome?.message || ' '}
+                                    {...register('cognome', {
+                                        required: {
+                                            value: true,
+                                            message: 'Questo campo è obbligatorio.',
+                                        },
+                                    })}
                                 />
                             </Grid>
                         </Grid>
                         <TextField
-                            required
                             fullWidth
-                            id="email"
                             label="Email"
-                            name="email"
                             autoComplete="email"
+                            required
                             sx={{ my: 1 }}
-                            error={!isEmailValid || !isAllValid}
-                            helperText={emailHelp}
+                            error={!!errors.email}
+                            helperText={errors.email?.message || ' '}
+                            {...register('email', {
+                                required: {
+                                    value: true,
+                                    message: 'Questo campo è obbligatorio.',
+                                },
+                                pattern: {
+                                    value: /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/,
+                                    message: "L'email inserita non ha un formato valido!",
+                                },
+                            })}
                         />
                         <TextField
-                            required
                             fullWidth
-                            id="password"
                             label="Password"
-                            name="password"
                             autoComplete="current-password"
                             type="password"
+                            required
                             sx={{ my: 1 }}
-                            error={!isAllValid}
+                            error={!!errors.password}
+                            helperText={errors.password?.message || ' '}
+                            {...register('password', {
+                                required: {
+                                    value: true,
+                                    message: 'Questo campo è obbligatorio.',
+                                },
+                                pattern: {
+                                    value: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/,
+                                    message: 'La password deve ...',
+                                },
+                            })}
                         />
                         <Button type="submit" fullWidth variant="contained" sx={{ my: 2 }}>
                             Entra

@@ -1,24 +1,34 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { RootState } from '~/hooks/Store';
 
-interface IUser {
+const api = (url: string, opt?: RequestInit) => fetch(`http://pcto.localhost/${url}`, opt);
+
+export interface IUser {
     id: number;
     nome: string;
     cognome: string;
     email: string;
-    propic: string;
+    img: string;
     role: number;
 }
 
-interface UserState {
-    entity: IUser | null;
-    status: 'pending' | 'succeeded' | 'failed';
-    error?: string;
+type UserStatus = 'loged' | 'logedout' | 'failed' | 'pending';
+
+export const enum UserError {
+    INVALID_BODY,
+    ALREADY_REGISTERED,
+    INVALID_CREDENTIALS,
+    UNKNOWN_USER,
 }
 
-const initialState: UserState = {
-    status: 'pending',
-    entity: null,
+export interface IUserState {
+    user?: IUser;
+    status: UserStatus;
+    error?: UserError;
+}
+
+const initialState: IUserState = {
+    status: 'logedout',
 };
 
 export interface IRegister {
@@ -26,79 +36,59 @@ export interface IRegister {
     cognome: string;
     email: string;
     password: string;
-    propic?: string;
 }
-
-export const enum RegisterError {
-    EXISTS = 'User already exists.',
-}
-
-export const SignUp = createAsyncThunk('user/signup', async (payload: IRegister, api) => {
-    const res = await fetch('http://pcto.localhost/register.php', {
-        method: 'POST',
-        // headers: {
-        //  Accept: 'application/json',
-        // 'Content-Type': 'application/json',
-        // },
-        body: JSON.stringify(payload),
-    });
-
-    const { message, data } = await res.json();
-    if (res.status === 201) {
-        localStorage.setItem('auth-token', data.token);
-        return { ...data.user };
-    }
-
-    return api.rejectWithValue(message);
-});
 
 export interface ILogin {
     email: string;
     password: string;
 }
 
-export const SignIn = createAsyncThunk('user/signin', async (payload: ILogin, api) => {
-    const res = await fetch('http://pcto.localhost/login.php', {
+const SignIn = createAsyncThunk('user/login', async (payload: ILogin, thunkApi) => {
+    const res = await api('login.php', {
         method: 'POST',
-        // headers: {
-        //      Accept: 'application/json',
-        //     'Content-Type': 'application/json',
-        // },
         body: JSON.stringify(payload),
     });
 
-    const { message, data } = await res.json();
+    const { data, error } = await res.json();
 
     if (res.status === 200) {
-        localStorage.setItem('auth-token', data.token);
+        localStorage.setItem('token', data.token);
         return { ...data.user };
     }
 
-    return api.rejectWithValue(message);
+    return thunkApi.rejectWithValue(error);
 });
 
-export const Fetch = createAsyncThunk('user/fetch', async (payload, api) => {
-    const state = api.getState() as UserState;
-    if (state.entity) {
-        return state.entity;
+const SignUp = createAsyncThunk('user/register', async (payload: IRegister, thunkApi) => {
+    const res = await api('register.php', {
+        method: 'POST',
+        body: JSON.stringify(payload),
+    });
+
+    const { data, error } = await res.json();
+
+    if (res.status === 200) {
+        localStorage.setItem('token', data.token);
+        return { ...data.user };
     }
 
-    const res = await fetch('http://pcto.localhost/users/user.php', {
+    return thunkApi.rejectWithValue(error);
+});
+
+const Fetch = createAsyncThunk('user/fetch', async (_, thunkApi) => {
+    const res = await api('users/user.php', {
         method: 'GET',
         headers: {
-            //     Accept: 'application/json',
-            //     'Content-Type': 'application/json',
-            authorization: `Bearer ${localStorage.getItem('auth-token')}`,
+            authorization: `Bearer ${localStorage.getItem('token')}`,
         },
     });
 
-    const { data, message } = await res.json();
-
+    const { data } = await res.json();
     if (res.status === 200) {
         return { ...data };
     }
 
-    return api.rejectWithValue(message);
+    return thunkApi.rejectWithValue(UserError.UNKNOWN_USER);
 });
 
 export const UserSlice = createSlice({
@@ -106,48 +96,50 @@ export const UserSlice = createSlice({
     initialState,
     reducers: {
         SignOut: state => {
-            state.entity = null;
-            state.status = 'pending';
-            localStorage.removeItem('auth-token');
+            state.status = 'logedout';
+            state.user = undefined;
+
+            localStorage.removeItem('token');
         },
     },
     extraReducers: builder => {
-        builder.addCase(SignUp.fulfilled, (state, action) => {
-            state.status = 'succeeded';
-            state.entity = action.payload;
-        });
-
-        builder.addCase(SignUp.rejected, (state, action) => {
+        builder.addCase(SignIn.rejected, (state, action) => {
             state.status = 'failed';
-            state.error = action.payload as string;
-        });
-
-        builder.addCase(SignUp.pending, state => {
-            state.status = 'pending';
+            state.error = action.payload as UserError;
         });
 
         builder.addCase(SignIn.fulfilled, (state, action) => {
-            state.status = 'succeeded';
-            state.entity = action.payload;
-        });
-
-        builder.addCase(SignIn.rejected, (state, action) => {
-            state.status = 'failed';
-            state.error = action.payload as string;
+            state.status = 'loged';
+            state.user = action.payload as IUser;
+            console.log('test');
         });
 
         builder.addCase(SignIn.pending, state => {
             state.status = 'pending';
         });
 
+        builder.addCase(SignUp.rejected, (state, action) => {
+            state.status = 'failed';
+            state.error = action.payload as UserError;
+        });
+
+        builder.addCase(SignUp.fulfilled, (state, action) => {
+            state.status = 'loged';
+            state.user = action.payload as IUser;
+        });
+
+        builder.addCase(SignUp.pending, state => {
+            state.status = 'pending';
+        });
+
         builder.addCase(Fetch.fulfilled, (state, action) => {
-            state.status = 'succeeded';
-            state.entity = action.payload;
+            state.status = 'loged';
+            state.user = action.payload as IUser;
         });
 
         builder.addCase(Fetch.rejected, (state, action) => {
-            state.status = 'failed';
-            state.error = action.payload as string;
+            state.status = 'logedout';
+            state.user = undefined;
         });
 
         builder.addCase(Fetch.pending, state => {
@@ -159,5 +151,6 @@ export const UserSlice = createSlice({
 export const getUser = (state: RootState) => state.user;
 
 export const { SignOut } = UserSlice.actions;
+export { SignIn, SignUp, Fetch };
 
 export default UserSlice.reducer;

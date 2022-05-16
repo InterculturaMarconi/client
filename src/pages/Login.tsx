@@ -9,6 +9,8 @@ import {
     Button,
     Grid,
     styled,
+    Alert,
+    Collapse,
 } from '@mui/material';
 import { useLocation, useNavigate, Location, Link } from 'react-router-dom';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
@@ -16,7 +18,7 @@ import { useForm } from 'react-hook-form';
 
 import Page from '~/components/Page';
 import { useDispatcher, useSelector } from '~/hooks/Store';
-import { getUser, SignIn, ILogin } from '~/reducers/user';
+import { getUser, SignIn, ILogin, UserError } from '~/reducers/user';
 
 interface ILocation extends Location {
     state: { from?: Location } | undefined;
@@ -35,12 +37,6 @@ const StyledLink = styled(Link)(({ theme }) => ({
     },
 }));
 
-interface Error {
-    name: keyof ILogin;
-    type: string;
-    message: string;
-}
-
 const Login: React.FC = () => {
     const location = useLocation() as ILocation;
     const navigate = useNavigate();
@@ -50,31 +46,36 @@ const Login: React.FC = () => {
     const {
         register,
         handleSubmit,
-        setError,
         formState: { errors },
+        setError,
     } = useForm<ILogin>();
 
     const from = location.state?.from?.pathname ?? '/';
 
     const onSubmit = async (data: ILogin) => {
-        console.log(data);
+        await dispatch(SignIn(data));
     };
 
     React.useEffect(() => {
-        if (user.status === 'succeeded' && user.entity) {
+        if (user.status === 'loged') {
             navigate(from, { replace: true });
+        }
+
+        if (user.status === 'failed' && user.error === UserError.INVALID_BODY) {
+            setError('email', { type: 'manual' });
+            setError('password', { type: 'manual' });
         }
     }, [user.status]);
 
     return (
         <Page title="Login | InterculturaMarconi">
-            <Container maxWidth="sm" sx={{ my: { xs: 6, xl: 'auto' } }}>
+            <Container maxWidth="sm" sx={{ my: 10 }}>
                 <Paper
                     sx={{
                         display: 'flex',
                         flexDirection: 'column',
                         alignItems: 'center',
-                        px: 2,
+                        px: 4,
                         py: 4,
                     }}
                     elevation={3}
@@ -85,6 +86,11 @@ const Login: React.FC = () => {
                     <Typography component="h1" variant="h5" fontWeight={500}>
                         Accedi
                     </Typography>
+                    <Collapse in={errors.email && errors.email.type === 'manual'}>
+                        <Alert severity="error" sx={{ mt: 1 }}>
+                            L'email o la password sono invalide!
+                        </Alert>
+                    </Collapse>
                     <Box
                         component="form"
                         onSubmit={handleSubmit(onSubmit)}
@@ -97,8 +103,8 @@ const Login: React.FC = () => {
                             label="Email"
                             autoComplete="email"
                             sx={{ my: 1 }}
-                            error={errors.email !== undefined}
-                            helperText={errors.email?.message}
+                            error={!!errors.email}
+                            helperText={errors.email?.message || ' '}
                             {...register('email', {
                                 required: { value: true, message: 'Questo campo è obbligatorio.' },
                                 pattern: {
@@ -114,8 +120,8 @@ const Login: React.FC = () => {
                             autoComplete="current-password"
                             type="password"
                             sx={{ my: 1 }}
-                            error={errors.password !== undefined}
-                            helperText={errors.password?.message}
+                            error={!!errors.password}
+                            helperText={errors.password?.message || ' '}
                             {...register('password', {
                                 required: { value: true, message: 'Questo campo è obbligatorio.' },
                                 pattern: {

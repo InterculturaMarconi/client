@@ -1,21 +1,25 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 
+import Test from '~/pages/Test';
 import Home from '~/pages/Home';
+import Login from '~/pages/Login';
+import Profile from '~/pages/Profile';
+import Register from '~/pages/Register';
 import Obiettivo1 from '~/pages/obiettivo/Obiettivo1';
 import Obiettivo14 from '~/pages/obiettivo/Obiettivo14';
-import { useDispatcher, useSelector } from '~/hooks/Store';
+
+import PrivateRoute from '~/components/PrivateRoute';
+
 import { getUser, Fetch } from '~/reducers/user';
-import Login from './pages/Login';
-import Test from './pages/Test';
-import Register from './pages/Register';
+import { useDispatcher, useSelector } from '~/hooks/Store';
 
 const App: React.FC = () => {
     const user = useSelector(getUser);
     const dispatch = useDispatcher();
 
     React.useEffect(() => {
-        if (!user.entity && localStorage.getItem('auth-token')) {
+        if (user.status === 'logedout') {
             dispatch(Fetch());
         }
     }, []);
@@ -26,6 +30,14 @@ const App: React.FC = () => {
                 <Route index element={<Home />} />
                 <Route path="login" element={<Login />} />
                 <Route path="register" element={<Register />} />
+                <Route
+                    path="profile"
+                    element={
+                        <PrivateRoute>
+                            <Profile />
+                        </PrivateRoute>
+                    }
+                />
                 <Route path="obiettivo">
                     <Route path="1" element={<Obiettivo1 />} />
                     <Route path="2" element={<Obiettivo1 />} />

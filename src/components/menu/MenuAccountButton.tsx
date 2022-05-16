@@ -20,9 +20,9 @@ const StyledLink = styled(Link)(({ theme }) => ({
 }));
 
 const MenuAccountButton: React.FC = () => {
-    const user = useSelector(getUser);
+    const state = useSelector(getUser);
 
-    if (!user.entity) {
+    if (!state.user) {
         return <StyledLink to="/login">ACCEDI</StyledLink>;
     }
 
@@ -30,7 +30,7 @@ const MenuAccountButton: React.FC = () => {
         <Tooltip title="Vai al profilo">
             <IconButton component="a" href="/profile" sx={{ p: 0 }}>
                 <Avatar
-                    alt={`${user.entity.nome} ${user.entity.cognome}`}
+                    alt={`${state.user.nome} ${state.user.cognome}`}
                     src="static/images/avatar/2.jpg"
                 />
             </IconButton>
