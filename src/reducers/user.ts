@@ -21,7 +21,7 @@ const initialState: UserState = {
     entity: null,
 };
 
-interface IRegister {
+export interface IRegister {
     nome: string;
     cognome: string;
     email: string;
@@ -52,7 +52,7 @@ export const SignUp = createAsyncThunk('user/signup', async (payload: IRegister,
     return api.rejectWithValue(message);
 });
 
-interface ILogin {
+export interface ILogin {
     email: string;
     password: string;
 }

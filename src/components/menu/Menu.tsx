@@ -73,6 +73,7 @@ const Menu: React.FC = () => {
                                 display: { xs: 'flex', md: 'none' },
                                 justifyContent: 'space-between',
                                 flexGrow: 1,
+                                alignItems: 'center',
                             }}
                         >
                             <IconButton onClick={toggleDrawer(!open)} sx={{ color: 'white' }}>

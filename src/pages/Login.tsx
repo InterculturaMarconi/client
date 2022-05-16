@@ -1,3 +1,4 @@
+import React from 'react';
 import {
     Paper,
     Container,
@@ -9,12 +10,13 @@ import {
     Grid,
     styled,
 } from '@mui/material';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import React from 'react';
 import { useLocation, useNavigate, Location, Link } from 'react-router-dom';
+import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import { useForm } from 'react-hook-form';
+
 import Page from '~/components/Page';
 import { useDispatcher, useSelector } from '~/hooks/Store';
-import { getUser, SignIn } from '~/reducers/user';
+import { getUser, SignIn, ILogin } from '~/reducers/user';
 
 interface ILocation extends Location {
     state: { from?: Location } | undefined;
@@ -33,23 +35,29 @@ const StyledLink = styled(Link)(({ theme }) => ({
     },
 }));
 
+interface Error {
+    name: keyof ILogin;
+    type: string;
+    message: string;
+}
+
 const Login: React.FC = () => {
     const location = useLocation() as ILocation;
     const navigate = useNavigate();
     const dispatch = useDispatcher();
     const user = useSelector(getUser);
 
+    const {
+        register,
+        handleSubmit,
+        setError,
+        formState: { errors },
+    } = useForm<ILogin>();
+
     const from = location.state?.from?.pathname ?? '/';
 
-    const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-        event.preventDefault();
-
-        const data = new FormData(event.currentTarget);
-
-        const email = data.get('email') as string;
-        const password = data.get('password') as string;
-
-        dispatch(SignIn({ email, password }));
+    const onSubmit = async (data: ILogin) => {
+        console.log(data);
     };
 
     React.useEffect(() => {
@@ -60,7 +68,7 @@ const Login: React.FC = () => {
 
     return (
         <Page title="Login | InterculturaMarconi">
-            <Container maxWidth="sm" sx={{ my: { xs: 6, md: 'auto' } }}>
+            <Container maxWidth="sm" sx={{ my: { xs: 6, xl: 'auto' } }}>
                 <Paper
                     sx={{
                         display: 'flex',
@@ -77,25 +85,44 @@ const Login: React.FC = () => {
                     <Typography component="h1" variant="h5" fontWeight={500}>
                         Accedi
                     </Typography>
-                    <Box component="form" onSubmit={onSubmit} noValidate sx={{ mt: 1 }}>
+                    <Box
+                        component="form"
+                        onSubmit={handleSubmit(onSubmit)}
+                        noValidate
+                        sx={{ mt: 1 }}
+                    >
                         <TextField
                             required
                             fullWidth
-                            id="email"
                             label="Email"
-                            name="email"
                             autoComplete="email"
                             sx={{ my: 1 }}
+                            error={errors.email !== undefined}
+                            helperText={errors.email?.message}
+                            {...register('email', {
+                                required: { value: true, message: 'Questo campo è obbligatorio.' },
+                                pattern: {
+                                    value: /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/,
+                                    message: "L'email inserita non ha un formato valido!",
+                                },
+                            })}
                         />
                         <TextField
                             required
                             fullWidth
-                            id="password"
                             label="Password"
-                            name="password"
                             autoComplete="current-password"
                             type="password"
                             sx={{ my: 1 }}
+                            error={errors.password !== undefined}
+                            helperText={errors.password?.message}
+                            {...register('password', {
+                                required: { value: true, message: 'Questo campo è obbligatorio.' },
+                                pattern: {
+                                    value: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/,
+                                    message: 'La password deve ...',
+                                },
+                            })}
                         />
                         <Button type="submit" fullWidth variant="contained" sx={{ my: 2 }}>
                             Entra
