@@ -1,7 +1,8 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { RootState } from '~/hooks/Store';
 
-const api = (url: string, opt?: RequestInit) => fetch(`http://pcto.localhost/${url}`, opt);
+const api = (url: string, opt?: RequestInit) =>
+    fetch(`http://pctomarconi.altervista.org/${url}`, opt);
 
 export interface IUser {
     id: number;
@@ -44,7 +45,7 @@ export interface ILogin {
 }
 
 const SignIn = createAsyncThunk('user/login', async (payload: ILogin, thunkApi) => {
-    const res = await api('login.php', {
+    const res = await api('login', {
         method: 'POST',
         body: JSON.stringify(payload),
     });
@@ -60,7 +61,7 @@ const SignIn = createAsyncThunk('user/login', async (payload: ILogin, thunkApi) 
 });
 
 const SignUp = createAsyncThunk('user/register', async (payload: IRegister, thunkApi) => {
-    const res = await api('register.php', {
+    const res = await api('register', {
         method: 'POST',
         body: JSON.stringify(payload),
     });
@@ -76,7 +77,7 @@ const SignUp = createAsyncThunk('user/register', async (payload: IRegister, thun
 });
 
 const Fetch = createAsyncThunk('user/fetch', async (_, thunkApi) => {
-    const res = await api('users/user.php', {
+    const res = await api('user', {
         method: 'GET',
         headers: {
             authorization: `Bearer ${localStorage.getItem('token')}`,
