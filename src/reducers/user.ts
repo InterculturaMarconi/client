@@ -10,7 +10,6 @@ export interface IUser {
     cognome: string;
     email: string;
     img: string;
-    role: number;
 }
 
 type UserStatus = 'loged' | 'logedout' | 'failed' | 'pending';
