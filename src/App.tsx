@@ -7,6 +7,8 @@ import Login from '~/pages/Login';
 import Profile from '~/pages/Profile';
 import Register from '~/pages/Register';
 import Obiettivo1 from '~/pages/obiettivo/Obiettivo1';
+import Obiettivo2 from './pages/obiettivo/Obiettivo2';
+import Obiettivo6 from './pages/obiettivo/Obiettivo6';
 import Obiettivo14 from '~/pages/obiettivo/Obiettivo14';
 
 import PrivateRoute from '~/components/PrivateRoute';
@@ -40,11 +42,11 @@ const App: React.FC = () => {
                 />
                 <Route path="obiettivo">
                     <Route path="1" element={<Obiettivo1 />} />
-                    <Route path="2" element={<Obiettivo1 />} />
+                    <Route path="2" element={<Obiettivo2 />} />
                     <Route path="3" element={<Obiettivo1 />} />
                     <Route path="4" element={<Obiettivo1 />} />
                     <Route path="5" element={<Obiettivo1 />} />
-                    <Route path="6" element={<Obiettivo1 />} />
+                    <Route path="6" element={<Obiettivo6 />} />
                     <Route path="7" element={<Obiettivo1 />} />
                     <Route path="8" element={<Obiettivo1 />} />
                     <Route path="9" element={<Obiettivo1 />} />
