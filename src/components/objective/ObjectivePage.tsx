@@ -15,16 +15,16 @@ interface IObjectivePage {
     backgroundObb: string;
     squareId: number;
     immagine_2: string;
-    body_1: string;
+    body_1: React.ReactNode;
     sottotitolo_1: string;
-    body_2: string;
-    body_3: string;
-    body_4: string;
+    body_2: React.ReactNode;
+    body_3: React.ReactNode;
+    body_4: React.ReactNode;
     immagine_3: string;
     sottotitolo_2: string;
     immagine_4: string;
     sottotitolo_3: string;
-    body_5: string;
+    body_5: React.ReactNode;
 }
 
 const ObjectivePage: React.FC<IObjectivePage> = ({

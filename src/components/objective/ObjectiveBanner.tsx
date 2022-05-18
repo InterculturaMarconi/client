@@ -4,7 +4,7 @@ import Filter from '~/components/Filter';
 
 interface IObjectiveBanner {
     img: string;
-    title: string;
+    title: React.ReactNode;
 }
 
 const ObjectiveBanner: React.FC<IObjectiveBanner> = ({ title, img }) => {
