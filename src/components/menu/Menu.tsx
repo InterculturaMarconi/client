@@ -51,7 +51,7 @@ const isKeyboardEvent = (
     event: React.KeyboardEvent | React.MouseEvent,
 ): event is React.KeyboardEvent => event.type === 'keydown';
 
-const Menu: React.FC<{ color: string }> = ({ color }) => {
+const Menu: React.FC<{ color?: string }> = ({ color }) => {
     const [open, setOpen] = React.useState(false);
     const theme = useTheme();
 
@@ -71,7 +71,9 @@ const Menu: React.FC<{ color: string }> = ({ color }) => {
                 position="static"
                 sx={{
                     backgroundColor:
-                        theme.palette.mode === 'light' ? color : theme.palette.background.default,
+                        theme.palette.mode === 'light' && color
+                            ? color
+                            : theme.palette.background.default,
                 }}
             >
                 <Container maxWidth="xl">

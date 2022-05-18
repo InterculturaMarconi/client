@@ -38,12 +38,15 @@ const pages = [
     { page: 'Blog', link: '/blog' },
 ];
 
-const Footer: React.FC = () => {
+const Footer: React.FC<{ color?: string }> = ({ color }) => {
     const theme = useTheme();
     return (
         <Box
             sx={{
-                backgroundColor: theme.palette.mode === 'dark' ? '#39393D' : '#007bb8',
+                backgroundColor:
+                    theme.palette.mode === 'light' && color
+                        ? color
+                        : theme.palette.background.default,
                 mt: 'auto',
                 width: '100%',
                 height: 'max-content',
