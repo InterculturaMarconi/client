@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { RootState } from '~/hooks/Store';
 
 const api = (url: string, opt?: RequestInit) =>
-    fetch(`http://pctomarconi.altervista.org/${url}`, opt);
+    fetch(`https://pctomarconi.altervista.org/${url}`, opt);
 
 export interface IUser {
     id: number;
@@ -47,12 +47,16 @@ export interface ILogin {
 const SignIn = createAsyncThunk('user/login', async (payload: ILogin, thunkApi) => {
     const res = await api('login', {
         method: 'POST',
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+        },
         body: JSON.stringify(payload),
     });
 
-    const { data, error } = await res.json();
+    const { data, error, success } = await res.json();
 
-    if (res.status === 200) {
+    if (success === true) {
         localStorage.setItem('token', data.token);
         return { ...data.user };
     }
@@ -66,9 +70,9 @@ const SignUp = createAsyncThunk('user/register', async (payload: IRegister, thun
         body: JSON.stringify(payload),
     });
 
-    const { data, error } = await res.json();
+    const { data, error, success } = await res.json();
 
-    if (res.status === 200) {
+    if (success) {
         localStorage.setItem('token', data.token);
         return { ...data.user };
     }
@@ -112,7 +116,6 @@ export const UserSlice = createSlice({
         builder.addCase(SignIn.fulfilled, (state, action) => {
             state.status = 'loged';
             state.user = action.payload as IUser;
-            console.log('test');
         });
 
         builder.addCase(SignIn.pending, state => {

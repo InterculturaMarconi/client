@@ -13,6 +13,7 @@ import {
     Divider,
     Container,
     styled,
+    useTheme,
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
@@ -50,8 +51,9 @@ const isKeyboardEvent = (
     event: React.KeyboardEvent | React.MouseEvent,
 ): event is React.KeyboardEvent => event.type === 'keydown';
 
-const Menu: React.FC = () => {
+const Menu: React.FC<{ color: string }> = ({ color }) => {
     const [open, setOpen] = React.useState(false);
+    const theme = useTheme();
 
     const toggleDrawer = (open: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
         if (isKeyboardEvent(event) && ['Tab', 'Shift'].includes(event.key)) {
@@ -65,7 +67,13 @@ const Menu: React.FC = () => {
 
     return (
         <>
-            <AppBar position="static">
+            <AppBar
+                position="static"
+                sx={{
+                    backgroundColor:
+                        theme.palette.mode === 'light' ? color : theme.palette.background.default,
+                }}
+            >
                 <Container maxWidth="xl">
                     <Toolbar disableGutters sx={{ py: { xs: 1, md: 0 } }}>
                         <Box

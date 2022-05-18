@@ -61,7 +61,7 @@ const Login: React.FC = () => {
             navigate(from, { replace: true });
         }
 
-        if (user.status === 'failed' && user.error === UserError.INVALID_BODY) {
+        if (user.status === 'failed' && user.error === UserError.INVALID_CREDENTIALS) {
             setError('email', { type: 'manual' });
             setError('password', { type: 'manual' });
         }
