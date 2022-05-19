@@ -40,13 +40,12 @@ const pages = [
 
 const Footer: React.FC<{ color?: string }> = ({ color }) => {
     const theme = useTheme();
+    const bgcolor = theme.palette.mode === 'dark' ? '#39393D' : color ? color : '#007bb8';
+
     return (
         <Box
             sx={{
-                backgroundColor:
-                    theme.palette.mode === 'light' && color
-                        ? color
-                        : theme.palette.background.default,
+                bgcolor,
                 mt: 'auto',
                 width: '100%',
                 height: 'max-content',

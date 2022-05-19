@@ -70,10 +70,7 @@ const Menu: React.FC<{ color?: string }> = ({ color }) => {
             <AppBar
                 position="static"
                 sx={{
-                    backgroundColor:
-                        theme.palette.mode === 'light' && color
-                            ? color
-                            : theme.palette.background.default,
+                    backgroundColor: theme.palette.mode === 'light' && color ? color : undefined,
                 }}
             >
                 <Container maxWidth="xl">
