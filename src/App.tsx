@@ -10,6 +10,7 @@ import Obiettivo1 from '~/pages/obiettivo/Obiettivo1';
 import Obiettivo2 from './pages/obiettivo/Obiettivo2';
 import Obiettivo6 from './pages/obiettivo/Obiettivo6';
 import Obiettivo14 from '~/pages/obiettivo/Obiettivo14';
+import Obiettivo15 from '~/pages/obiettivo/Obiettivo15';
 
 import PrivateRoute from '~/components/PrivateRoute';
 
@@ -55,7 +56,7 @@ const App: React.FC = () => {
                     <Route path="12" element={<Obiettivo1 />} />
                     <Route path="13" element={<Obiettivo1 />} />
                     <Route path="14" element={<Obiettivo14 />} />
-                    <Route path="15" element={<Obiettivo1 />} />
+                    <Route path="15" element={<Obiettivo15 />} />
                     <Route path="16" element={<Obiettivo1 />} />
                     <Route path="17" element={<Obiettivo1 />} />
                     <Route path="18" element={<Obiettivo1 />} />
