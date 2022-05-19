@@ -31,11 +31,7 @@ const MenuAccountButton: React.FC = () => {
             <IconButton component="a" href="/profile" sx={{ p: 0 }}>
                 <Avatar
                     alt={`${userState.user.nome} ${userState.user.cognome}`}
-                    src={`${
-                        !userState.user?.img
-                            ? '/avatar.png'
-                            : `data:image/png;base64,${userState.user?.img}`
-                    }`}
+                    src={`${!userState.user?.img ? '/avatar.png' : `${userState.user?.img}`}`}
                 />
             </IconButton>
         </Tooltip>

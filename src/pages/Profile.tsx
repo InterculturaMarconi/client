@@ -3,17 +3,29 @@ import Dropzone from 'react-dropzone';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import ImageIcon from '@mui/icons-material/Image';
-import { Avatar, Box, Button, Container, TextField, Paper, styled, useTheme } from '@mui/material';
+import {
+    Avatar,
+    Box,
+    Button,
+    Container,
+    TextField,
+    Paper,
+    styled,
+    useTheme,
+    Typography,
+} from '@mui/material';
 
 import Page from '~/components/Page';
 import { useDispatcher, useSelector } from '~/hooks/Store';
-import { getUser, IUser, SignOut } from '~/reducers/user';
+import { getUser, SignOut, Update } from '~/reducers/user';
 
 const RootDiv = styled('div')(({ theme }) => ({
     padding: theme.spacing(4),
     display: 'flex',
     alignItems: 'center',
     cursor: 'pointer',
+    flexGrow: 2,
+    height: '100px',
 }));
 
 const Profile: React.FC = () => {
@@ -21,15 +33,37 @@ const Profile: React.FC = () => {
         register,
         handleSubmit,
         formState: { errors },
-    } = useForm<IUser>();
+    } = useForm<{
+        nome?: string;
+        cognome?: string;
+    }>();
+
     const userState = useSelector(getUser);
     const navigate = useNavigate();
     const dispatch = useDispatcher();
     const theme = useTheme();
 
-    const [newImage, setNewImage] = React.useState(userState.user?.img ?? '');
+    const [newImage, setNewImage] = React.useState(userState.user?.img || '');
 
-    const onSubmit = handleSubmit(async data => {});
+    const onSubmit = handleSubmit(async data => {
+        if (!userState.user) return;
+
+        const body: Record<string, string> = {};
+
+        if (data.nome && data.nome !== userState.user.nome) {
+            body['nome'] = data.nome;
+        }
+
+        if (data.cognome && data.cognome !== userState.user.cognome) {
+            body['cognome'] = data.cognome;
+        }
+
+        if (newImage && newImage !== userState.user.img) {
+            body['img'] = newImage;
+        }
+
+        await dispatch(Update({ id: userState.user.id, body }));
+    });
 
     const LogOut = async () => {
         dispatch(SignOut());
@@ -40,7 +74,7 @@ const Profile: React.FC = () => {
         const reader = new FileReader();
 
         reader.onloadend = () => {
-            const base64 = (reader.result as string).replace(/^data:.+;base64,/, '');
+            const base64 = reader.result as string;
             setNewImage(base64);
         };
 
@@ -55,7 +89,9 @@ const Profile: React.FC = () => {
                     onSubmit={onSubmit}
                     sx={{ display: 'flex', flexDirection: 'column', gap: 5 }}
                 >
-                    <Box sx={{ display: 'flex', gap: 2 }}>
+                    <Box
+                        sx={{ display: 'flex', gap: 2, flexDirection: { xs: 'column', md: 'row' } }}
+                    >
                         <TextField
                             fullWidth
                             label="Nome"
@@ -69,34 +105,68 @@ const Profile: React.FC = () => {
                             {...register('cognome', { value: userState.user?.cognome })}
                         />
                     </Box>
-                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+                    <Box
+                        sx={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            gap: 6,
+                            flexDirection: { xs: 'column', md: 'row' },
+                        }}
+                    >
                         <Avatar
                             sx={{ width: 100, height: 100 }}
                             alt={`${userState.user?.nome} ${userState.user?.cognome}`}
-                            src={`${
-                                !newImage ? '/avatar.png' : `data:image/png;base64,${newImage}`
-                            }`}
+                            src={`${!newImage ? '/avatar.png' : `${newImage}`}`}
                         />
-                        <Dropzone onDrop={onDrop}>
-                            {({ getRootProps, getInputProps, isDragActive }) => (
+                        <Dropzone
+                            onDrop={onDrop}
+                            accept={{
+                                'image/png': ['.png'],
+                                'image/gif': ['.jpeg', '.jpg'],
+                                'image/jpg': ['.gif'],
+                            }}
+                            minSize={0}
+                            maxFiles={1}
+                        >
+                            {({ getRootProps, getInputProps, isDragActive, fileRejections }) => (
                                 <Paper
                                     sx={{
                                         bgcolor:
                                             theme.palette.mode === 'dark' ? 'grey.900' : 'inherit',
+                                        flexGrow: 1,
                                     }}
                                     variant="outlined"
                                 >
                                     <RootDiv {...getRootProps()}>
                                         <ImageIcon sx={{ mr: 2 }} />
                                         <input {...getInputProps()} />
-                                        {isDragActive ? 'Drag file here' : 'Click or drag a file.'}
+                                        {isDragActive ? (
+                                            <Typography>Rilascia il file qui.</Typography>
+                                        ) : (
+                                            <Typography>
+                                                Clicca per selezionare un file o trascinalo.
+                                            </Typography>
+                                        )}
                                     </RootDiv>
                                 </Paper>
                             )}
                         </Dropzone>
                     </Box>
-                    <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-                        <Box sx={{ display: 'flex', gap: 2 }}>
+                    <Box
+                        sx={{
+                            display: 'flex',
+                            justifyContent: { xs: 'flex-start', md: 'space-between' },
+                            gap: 2,
+                            flexDirection: { xs: 'column', md: 'row' },
+                        }}
+                    >
+                        <Box
+                            sx={{
+                                display: 'flex',
+                                gap: 2,
+                                flexDirection: { xs: 'column', md: 'row' },
+                            }}
+                        >
                             <Button variant="contained" type="submit">
                                 AGGIORNA INFORMAZIONI
                             </Button>

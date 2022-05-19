@@ -87,12 +87,36 @@ const Fetch = createAsyncThunk('user/fetch', async (_, thunkApi) => {
         },
     });
 
-    const { data } = await res.json();
-    if (res.status === 200) {
+    const { data, success } = await res.json();
+    if (success) {
         return { ...data };
     }
 
     return thunkApi.rejectWithValue(UserError.UNKNOWN_USER);
+});
+
+interface IUserUpdate {
+    id: number;
+    body: Record<string, string>;
+}
+
+const Update = createAsyncThunk('user/update', async (payload: IUserUpdate, thunkApi) => {
+    const res = await api(`user/${payload.id}`, {
+        method: 'PUT',
+        headers: {
+            authorization: `Bearer ${localStorage.getItem('token')}`,
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload.body),
+    });
+
+    const { data, error, success } = await res.json();
+
+    if (success) {
+        return { ...data };
+    }
+
+    return thunkApi.rejectWithValue(error);
 });
 
 export const UserSlice = createSlice({
@@ -143,9 +167,23 @@ export const UserSlice = createSlice({
         builder.addCase(Fetch.rejected, (state, action) => {
             state.status = 'logedout';
             state.user = undefined;
+            state.error = action.payload as UserError;
         });
 
         builder.addCase(Fetch.pending, state => {
+            state.status = 'pending';
+        });
+
+        builder.addCase(Update.fulfilled, (state, action) => {
+            state.status = 'loged';
+            state.user = action.payload as IUser;
+        });
+
+        builder.addCase(Update.rejected, (state, action) => {
+            state.error = action.payload as UserError;
+        });
+
+        builder.addCase(Update.pending, state => {
             state.status = 'pending';
         });
     },
@@ -154,6 +192,6 @@ export const UserSlice = createSlice({
 export const getUser = (state: RootState) => state.user;
 
 export const { SignOut } = UserSlice.actions;
-export { SignIn, SignUp, Fetch };
+export { SignIn, SignUp, Fetch, Update };
 
 export default UserSlice.reducer;
