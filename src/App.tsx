@@ -59,7 +59,6 @@ const App: React.FC = () => {
                     <Route path="15" element={<Obiettivo15 />} />
                     <Route path="16" element={<Obiettivo1 />} />
                     <Route path="17" element={<Obiettivo1 />} />
-                    <Route path="18" element={<Obiettivo1 />} />
                 </Route>
                 <Route path="test" element={<Test />} />
             </Route>

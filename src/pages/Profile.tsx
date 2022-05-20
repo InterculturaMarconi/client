@@ -13,8 +13,10 @@ import {
     styled,
     useTheme,
     Typography,
+    Modal,
 } from '@mui/material';
 
+import { api } from '~/main';
 import Page from '~/components/Page';
 import { useDispatcher, useSelector } from '~/hooks/Store';
 import { getUser, SignOut, Update } from '~/reducers/user';
@@ -44,6 +46,7 @@ const Profile: React.FC = () => {
     const theme = useTheme();
 
     const [newImage, setNewImage] = React.useState(userState.user?.img || '');
+    const [open, setOpen] = React.useState(false);
 
     const onSubmit = handleSubmit(async data => {
         if (!userState.user) return;
@@ -79,6 +82,21 @@ const Profile: React.FC = () => {
         };
 
         reader.readAsDataURL(data[0]);
+    };
+
+    const onDelete = async () => {
+        const res = await api(`user/${userState.user?.id}`, {
+            method: 'DELETE',
+            headers: {
+                authorization: `Bearer ${localStorage.getItem('token')}`,
+            },
+        });
+
+        const { success } = await res.json();
+
+        if (success) {
+            await LogOut();
+        }
     };
 
     return (
@@ -170,7 +188,7 @@ const Profile: React.FC = () => {
                             <Button variant="contained" type="submit">
                                 AGGIORNA INFORMAZIONI
                             </Button>
-                            <Button variant="contained" color="error">
+                            <Button variant="contained" color="error" onClick={() => setOpen(true)}>
                                 ELIMINA PROFILO
                             </Button>
                         </Box>
@@ -180,6 +198,46 @@ const Profile: React.FC = () => {
                     </Box>
                 </Box>
             </Container>
+            <Modal open={open} onClose={() => setOpen(false)}>
+                <Box
+                    sx={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        height: '100%',
+                        mx: { xs: 2, md: 0 },
+                    }}
+                >
+                    <Paper
+                        sx={{
+                            px: 4,
+                            py: 2,
+                        }}
+                    >
+                        <Typography variant="h5" gutterBottom>
+                            Sei sicuro?
+                        </Typography>
+                        <Typography variant="body2">
+                            Cancellando l'account ogni dato personale verrà cancellato.
+                        </Typography>
+                        <Box
+                            sx={{
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'space-between',
+                                mt: 4,
+                            }}
+                        >
+                            <Button variant="contained" color="error">
+                                ELIMINA
+                            </Button>
+                            <Button variant="outlined" onClick={() => setOpen(false)}>
+                                ANNULLA
+                            </Button>
+                        </Box>
+                    </Paper>
+                </Box>
+            </Modal>
         </Page>
     );
 };

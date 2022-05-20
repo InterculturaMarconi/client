@@ -1,8 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { RootState } from '~/hooks/Store';
-
-const api = (url: string, opt?: RequestInit) =>
-    fetch(`https://pctomarconi.altervista.org/${url}`, opt);
+import { api } from '~/main';
 
 export interface IUser {
     id: number;

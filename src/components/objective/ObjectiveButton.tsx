@@ -7,9 +7,13 @@ export interface IObjectiveButton {
     icon: string;
 }
 
-const ObjectiveButton = styled(({ id, icon, ...props }: IObjectiveButton) => (
-    <Link to={`/obiettivo/${id}`} reloadDocument {...props} />
-))<IObjectiveButton>(({ theme, icon }) => ({
+const ObjectiveButton = styled(({ id, icon, ...props }: IObjectiveButton) => {
+    if (id == 18) {
+        return <a href="https://unric.org/it/agenda-2030/" {...props} />;
+    }
+
+    return <Link to={`/obiettivo/${id}`} reloadDocument {...props} />;
+})<IObjectiveButton>(({ theme, icon }) => ({
     width: '9rem',
     height: '9rem',
     display: 'inline-block',

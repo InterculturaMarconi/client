@@ -9,6 +9,9 @@ import { store } from '~/hooks/Store';
 
 const root = ReactDOM.createRoot(document.getElementById('root')!);
 
+export const api = (url: string, opt?: RequestInit) =>
+    fetch(`https://pctomarconi.altervista.org/${url}`, opt);
+
 root.render(
     <React.StrictMode>
         <Provider store={store}>
