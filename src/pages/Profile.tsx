@@ -88,7 +88,7 @@ const Profile: React.FC = () => {
         const res = await api(`user/${userState.user?.id}`, {
             method: 'DELETE',
             headers: {
-                authorization: `Bearer ${localStorage.getItem('token')}`,
+                'X-Authorization': `${localStorage.getItem('token')}`,
             },
         });
 
@@ -228,7 +228,7 @@ const Profile: React.FC = () => {
                                 mt: 4,
                             }}
                         >
-                            <Button variant="contained" color="error">
+                            <Button variant="contained" color="error" onClick={onDelete}>
                                 ELIMINA
                             </Button>
                             <Button variant="outlined" onClick={() => setOpen(false)}>

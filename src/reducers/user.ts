@@ -81,7 +81,7 @@ const Fetch = createAsyncThunk('user/fetch', async (_, thunkApi) => {
     const res = await api('user', {
         method: 'GET',
         headers: {
-            authorization: `Bearer ${localStorage.getItem('token')}`,
+            'X-Authorization': `${localStorage.getItem('token')}`,
         },
     });
 
@@ -102,7 +102,7 @@ const Update = createAsyncThunk('user/update', async (payload: IUserUpdate, thun
     const res = await api(`user/${payload.id}`, {
         method: 'PUT',
         headers: {
-            authorization: `Bearer ${localStorage.getItem('token')}`,
+            'X-Authorization': `${localStorage.getItem('token')}`,
             'Content-Type': 'application/json',
         },
         body: JSON.stringify(payload.body),
