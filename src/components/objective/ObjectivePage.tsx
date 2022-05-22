@@ -5,9 +5,10 @@ import { Box } from '@mui/system';
 import ObjectiveCover from '~/components/objective/ObjectiveCover';
 import { useImage } from '~/hooks/Image';
 import ObjectiveCard from '~/components/objective/ObjectiveCard';
-import { Container, Typography } from '@mui/material';
+import { Typography } from '@mui/material';
 import ObjectiveBanner from '~/components/objective/ObjectiveBanner';
 import ObjectiveCaption from '~/components/objective/ObjectiveCaption';
+import ObjectiveForm from './ObjectiveForm';
 
 interface IObjectivePage {
     title: string;
@@ -96,6 +97,7 @@ const ObjectivePage: React.FC<IObjectivePage> = ({
             {/* <Container sx={{ mt: 5 }}>
                 <ReactPlayer url="https://www.youtube.com/watch?v=CcNWGKsCSTc" />
             </Container> */}
+            <ObjectiveForm id={squareId} />
         </Box>
     );
 };

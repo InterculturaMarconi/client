@@ -1,17 +1,7 @@
 import React from 'react';
-import { Typography, Modal, Button, Paper, Box, TextField, styled } from '@mui/material';
 
 import Page from '~/components/Page';
 import ObjectivePage from '~/components/objective/ObjectivePage';
-
-const ModalBox = styled(Box)(({ theme }) => ({
-    position: 'absolute',
-    width: '100%',
-    height: '100%',
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-}));
 
 const body_1 =
     "La povertà è un fenomeno altamente complesso, che riguarda diverse sfere della vita di una persona e che non può essere semplicemente calcolato sulla base del reddito. L'Agenda 2030 pone come primo target l'eradicazione della povertà estrema, ovvero di persone che vivono con meno di 1,25 dollari al giorno. Ma oltre a questa dimensione, il rischio di povertà si manifesta in molte forme (disoccupazione, salari bassi, basso livello di istruzione) e causa una bassa capacità di partecipazione alle decisioni politiche e, più in generale, un alto rischio di esclusione sociale.";
@@ -45,33 +35,6 @@ const Obiettivo1: React.FC = () => {
                 immagine_4="obb1/img4obb1.jpg"
                 sottotitolo_3="I principali traguardi dell'obiettivo 1"
             />
-            <Button onClick={handleFormOpen}>ESEGUI QUESTIONARIO</Button>
-            <Modal open={isFormOpen} onClose={handleFormOpen}>
-                <ModalBox>
-                    <Paper sx={{ p: 4 }} elevation={4}>
-                        <Box
-                            component="form"
-                            sx={{
-                                width: '20vw',
-                                display: 'flex',
-                                gap: 2,
-                                flexDirection: 'column',
-                            }}
-                        >
-                            <Box>
-                                <Typography variant="body1" gutterBottom>
-                                    Domanda 1
-                                </Typography>
-                                <TextField fullWidth />
-                            </Box>
-                            <TextField fullWidth />
-                            <TextField fullWidth />
-                            <TextField fullWidth />
-                            <TextField fullWidth />
-                        </Box>
-                    </Paper>
-                </ModalBox>
-            </Modal>
         </Page>
     );
 };

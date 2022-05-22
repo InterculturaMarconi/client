@@ -146,7 +146,7 @@ const Profile: React.FC = () => {
                             minSize={0}
                             maxFiles={1}
                         >
-                            {({ getRootProps, getInputProps, isDragActive, fileRejections }) => (
+                            {({ getRootProps, getInputProps, isDragActive }) => (
                                 <Paper
                                     sx={{
                                         bgcolor:

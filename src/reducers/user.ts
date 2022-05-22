@@ -77,21 +77,25 @@ const SignUp = createAsyncThunk('user/register', async (payload: IRegister, thun
     return thunkApi.rejectWithValue(error);
 });
 
-const Fetch = createAsyncThunk('user/fetch', async (_, thunkApi) => {
-    const res = await api('user', {
-        method: 'GET',
-        headers: {
-            'X-Authorization': `${localStorage.getItem('token')}`,
-        },
-    });
+const Fetch = createAsyncThunk<IUser, void, { state: IUserState; rejectValue: UserError }>(
+    'user/fetch',
+    async (_, thunkApi) => {
+        const res = await api('user', {
+            method: 'GET',
+            headers: {
+                'X-Authorization': `${localStorage.getItem('token')}`,
+            },
+        });
 
-    const { data, success } = await res.json();
-    if (success) {
-        return { ...data };
-    }
+        const { data, success } = await res.json();
+        if (success) {
+            return { ...data };
+        }
 
-    return thunkApi.rejectWithValue(UserError.UNKNOWN_USER);
-});
+        return thunkApi.rejectWithValue(UserError.UNKNOWN_USER);
+    },
+    { condition: (_, { getState }) => getState().user !== null },
+);
 
 interface IUserUpdate {
     id: number;

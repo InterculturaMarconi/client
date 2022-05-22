@@ -4,7 +4,7 @@ import { useSelector } from '~/hooks/Store';
 import { getUser } from '~/reducers/user';
 
 const PrivateRoute: React.FC<React.PropsWithChildren<{}>> = props => {
-    const { status } = useSelector(getUser);
+    const { status, user } = useSelector(getUser);
     const location = useLocation();
 
     if (status === 'logedout' || status === 'failed') {
