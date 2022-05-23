@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { RootState } from '~/hooks/Store';
-import { api } from '~/main';
+import api from '~/api';
 
 export interface IUser {
     id: number;
@@ -42,14 +42,7 @@ export interface ILogin {
 }
 
 const SignIn = createAsyncThunk('user/login', async (payload: ILogin, thunkApi) => {
-    const res = await api('login', {
-        method: 'POST',
-        headers: {
-            Accept: 'application/json',
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(payload),
-    });
+    const res = await api.post('/login', JSON.stringify(payload));
 
     const { data, error, success } = await res.json();
 
@@ -62,11 +55,7 @@ const SignIn = createAsyncThunk('user/login', async (payload: ILogin, thunkApi) 
 });
 
 const SignUp = createAsyncThunk('user/register', async (payload: IRegister, thunkApi) => {
-    const res = await api('register', {
-        method: 'POST',
-        body: JSON.stringify(payload),
-    });
-
+    const res = await api.post('/register', JSON.stringify(payload));
     const { data, error, success } = await res.json();
 
     if (success) {
@@ -80,14 +69,9 @@ const SignUp = createAsyncThunk('user/register', async (payload: IRegister, thun
 const Fetch = createAsyncThunk<IUser, void, { state: IUserState; rejectValue: UserError }>(
     'user/fetch',
     async (_, thunkApi) => {
-        const res = await api('user', {
-            method: 'GET',
-            headers: {
-                'X-Authorization': `${localStorage.getItem('token')}`,
-            },
-        });
-
+        const res = await api.get('/user');
         const { data, success } = await res.json();
+
         if (success) {
             return { ...data };
         }
@@ -103,15 +87,7 @@ interface IUserUpdate {
 }
 
 const Update = createAsyncThunk('user/update', async (payload: IUserUpdate, thunkApi) => {
-    const res = await api(`user/${payload.id}`, {
-        method: 'PUT',
-        headers: {
-            'X-Authorization': `${localStorage.getItem('token')}`,
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(payload.body),
-    });
-
+    const res = await api.put(`/user/${payload.id}`, JSON.stringify(payload.body));
     const { data, error, success } = await res.json();
 
     if (success) {

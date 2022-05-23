@@ -10,7 +10,7 @@ import {
     TextField,
 } from '@mui/material';
 import React from 'react';
-import { api } from '~/main';
+import api from '~/api';
 
 const ModalBox = styled(Box)(({ theme }) => ({
     position: 'absolute',
@@ -37,15 +37,14 @@ const ObjectiveForm: React.FC<IObjectiveForm> = ({ id }) => {
 
     React.useEffect(() => {
         const fetch = async () => {
-            const form = await api(`forms/${id}/visible`);
-
+            const form = await api.get(`/forms/${id}/visible`);
             const formData = await form.json();
 
             if (!formData.success) {
                 return;
             }
 
-            const res = await api(`form/${formData.data.id}/questions`);
+            const res = await api.get(`/form/${formData.data.id}/questions`);
             const { data, success } = await res.json();
 
             if (!success) {

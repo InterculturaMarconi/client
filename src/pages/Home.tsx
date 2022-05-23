@@ -1,6 +1,6 @@
 import React from 'react';
 import Divider from '@mui/material/Divider';
-import ObjectivesTable from '~/components/objective/ObjectivesTable';
+import ObjectivesTable from '~/components/objective/table/ObjectivesTable';
 import ObjectiveGridData from '~/components/objective/ObjectiveGridData';
 import Page from '~/components/Page';
 import draw1 from '~/img/draw/001-drawkit-content-man-colour.svg';

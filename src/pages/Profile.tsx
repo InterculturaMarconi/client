@@ -16,7 +16,7 @@ import {
     Modal,
 } from '@mui/material';
 
-import { api } from '~/main';
+import api from '~/api';
 import Page from '~/components/Page';
 import { useDispatcher, useSelector } from '~/hooks/Store';
 import { getUser, SignOut, Update } from '~/reducers/user';
@@ -85,13 +85,7 @@ const Profile: React.FC = () => {
     };
 
     const onDelete = async () => {
-        const res = await api(`user/${userState.user?.id}`, {
-            method: 'DELETE',
-            headers: {
-                'X-Authorization': `${localStorage.getItem('token')}`,
-            },
-        });
-
+        const res = await api.del(`/user/${userState.user?.id}`);
         const { success } = await res.json();
 
         if (success) {
