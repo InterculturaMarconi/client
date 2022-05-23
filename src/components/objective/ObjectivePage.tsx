@@ -8,7 +8,7 @@ import ObjectiveCard from '~/components/objective/ObjectiveCard';
 import { Typography } from '@mui/material';
 import ObjectiveBanner from '~/components/objective/ObjectiveBanner';
 import ObjectiveCaption from '~/components/objective/ObjectiveCaption';
-import ObjectiveForm from './ObjectiveForm';
+import ObjectiveForm from './form/ObjectiveForm';
 
 interface IObjectivePage {
     title: string;

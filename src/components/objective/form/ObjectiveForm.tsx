@@ -10,7 +10,10 @@ import {
     TextField,
 } from '@mui/material';
 import React from 'react';
+import { useForm, UseFormRegisterReturn } from 'react-hook-form';
 import api from '~/api';
+import ObjectiveText from './ObjectiveText';
+import ObjectiveRadio from './ObjectiveRadio';
 
 const ModalBox = styled(Box)(({ theme }) => ({
     position: 'absolute',
@@ -21,18 +24,23 @@ const ModalBox = styled(Box)(({ theme }) => ({
     alignItems: 'center',
 }));
 
-interface IObjectiveForm {
-    id: number;
-}
-
 interface IQuestion {
     id: number;
     testo: string;
     tipo: number;
 }
 
-const ObjectiveForm: React.FC<IObjectiveForm> = ({ id }) => {
+export type InputProps = IQuestion & UseFormRegisterReturn;
+
+const ObjectiveForm: React.FC<{ id: number }> = ({ id }) => {
     const [isOpen, setOpen] = React.useState(false);
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+        setError,
+    } = useForm();
+    const [hasPermission, setPermission] = React.useState(false);
     const [questions, setQuestions] = React.useState<IQuestion[]>([]);
 
     React.useEffect(() => {
@@ -52,10 +60,28 @@ const ObjectiveForm: React.FC<IObjectiveForm> = ({ id }) => {
             }
 
             setQuestions(data);
+
+            const roles = await api.get(`/user/${id}/roles`);
+            const rolesData = await roles.json();
+
+            if (!rolesData.success) {
+                return;
+            }
+
+            const role = rolesData.data.find(
+                (role: Record<string, unknown>) =>
+                    role.denominazione === 'admin' ||
+                    role.denominazione === `obiettivo_${id}` ||
+                    role.denominazione === `obiettivo_${id}_admin`,
+            );
+
+            setPermission(!!role);
         };
 
         fetch();
     }, []);
+
+    const onSubmit = handleSubmit(() => {});
 
     return (
         <Box
@@ -69,7 +95,7 @@ const ObjectiveForm: React.FC<IObjectiveForm> = ({ id }) => {
             }}
         >
             <Typography variant="h4">Pronto a farci sapere la tua?</Typography>
-            <Button variant="contained" onClick={() => setOpen(true)}>
+            <Button variant="contained" disabled={!hasPermission} onClick={() => setOpen(true)}>
                 COMPILA IL QUESTIONARIO
             </Button>
             <Modal
@@ -87,18 +113,20 @@ const ObjectiveForm: React.FC<IObjectiveForm> = ({ id }) => {
                             <Box
                                 component="form"
                                 sx={{
-                                    width: '20vw',
+                                    width: { xs: '90vw', md: '75vw', lg: '50vw' },
                                     display: 'flex',
                                     gap: 2,
                                     flexDirection: 'column',
                                 }}
+                                onSubmit={onSubmit}
                             >
-                                {questions.map(({ id, testo, tipo }) => (
-                                    <Box>
-                                        <Typography variant="body1" gutterBottom>
-                                            {testo}
-                                        </Typography>
-                                        <TextField variant="outlined" key={id} fullWidth />
+                                {questions.map(btn => (
+                                    <Box key={btn.id}>
+                                        {btn.tipo === 1 ? (
+                                            <ObjectiveText {...btn} {...register('')} />
+                                        ) : (
+                                            <ObjectiveRadio {...btn} {...register('')} />
+                                        )}
                                     </Box>
                                 ))}
                                 <Box
