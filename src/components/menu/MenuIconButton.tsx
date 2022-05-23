@@ -4,7 +4,7 @@ import { useImage } from '~/hooks/Image';
 
 const MenuIconButton: React.FC = () => {
     return (
-        <Link to="/">
+        <Link to="/" reloadDocument>
             <img src={useImage('Logo_Marconi_Vet.svg')} height={45} alt="" />
         </Link>
     );

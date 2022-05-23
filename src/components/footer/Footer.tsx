@@ -101,7 +101,7 @@ const Footer: React.FC<{ color?: string }> = ({ color }) => {
                     </FooterContent>
                     <FooterContent>
                         <FooterTitle>Informazioni</FooterTitle>
-                        <StyledLink to="/privacy">Infromativa Privacy</StyledLink>
+                        <StyledLink to="/privacy">Informativa Privacy</StyledLink>
                         <StyledLink to="/tou">Termini di Utilizzo</StyledLink>
                     </FooterContent>
                     <FooterContent sx={{ mt: { xs: 3, md: 0 } }}>
