@@ -4,7 +4,7 @@ import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
-import ObjectiveButton, { IObjectiveButton } from '~/components/objective/ObjectiveButton';
+import ObjectiveButton, { IObjectiveButton } from '~/components/objective/table/ObjectiveButton';
 import { useImage } from '~/hooks/Image';
 
 export interface IObjectiveGridData {

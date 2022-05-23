@@ -1,7 +1,7 @@
 import React from 'react';
 import { Container, Grid } from '@mui/material';
 
-import ObjectiveButton, { IObjectiveButton } from '~/components/objective/ObjectiveButton';
+import ObjectiveButton, { IObjectiveButton } from '~/components/objective/table/ObjectiveButton';
 import { useImage } from '~/hooks/Image';
 
 const btns: IObjectiveButton[] = [

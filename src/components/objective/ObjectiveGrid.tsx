@@ -1,13 +1,5 @@
 import * as React from 'react';
-import { useTheme } from '@mui/material/styles';
-import Box from '@mui/material/Box';
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-import Typography from '@mui/material/Typography';
-import { Container } from '@mui/material';
-import { Grid } from '@mui/material';
-import Divider from '@mui/material/Divider';
+import { CardContent, Card, CardMedia, Grid } from '@mui/material';
 
 export interface IObjectiveGrid {
     img1: String;
