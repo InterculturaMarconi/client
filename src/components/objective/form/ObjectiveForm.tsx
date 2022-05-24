@@ -16,6 +16,8 @@ import ObjectiveText from './ObjectiveText';
 import ObjectiveRadio from './ObjectiveRadio';
 import ObjectiveCheck from './ObjectiveCheck';
 import ObjectiveRange from './ObjectiveRange';
+import { useSelector } from '~/hooks/Store';
+import { getUser } from '~/reducers/user';
 
 const ModalBox = styled(Box)(({ theme }) => ({
     position: 'absolute',
@@ -48,6 +50,8 @@ const ObjectiveForm: React.FC<{ id: number }> = ({ id }) => {
     } = useForm();
     const [hasPermission, setPermission] = React.useState(false);
     const [questions, setQuestions] = React.useState<IQuestion[]>([]);
+    const [isAnswered, setAnswered] = React.useState(false);
+    const { user, status } = useSelector(getUser);
 
     React.useEffect(() => {
         const fetch = async () => {
@@ -89,17 +93,32 @@ const ObjectiveForm: React.FC<{ id: number }> = ({ id }) => {
         fetch();
     }, []);
 
+    React.useEffect(() => {
+        const fetch = async () => {
+            if (status === 'loged' && user) {
+                const answers = await api.get(`/form/${form}/answers/${user.id}`);
+                const answerData = await answers.json();
+
+                if (answerData.success) {
+                    setAnswered(true);
+                    return;
+                }
+            }
+        };
+        fetch();
+    }, [status, form]);
+
     const onSubmit = handleSubmit(data => {
-        // Object.keys(data).forEach(async key => {
-        // const res = await api.post(
-        // `/answer`,
-        // JSON.stringify({
-        // id_form: form,
-        // id_domanda: Number.parseInt(key),
-        // testo: data[key],
-        // }),
-        // );
-        // });
+        Object.keys(data).forEach(async key => {
+            const res = await api.post(
+                `/answer`,
+                JSON.stringify({
+                    id_form: form,
+                    id_domanda: Number.parseInt(key),
+                    testo: data[key],
+                }),
+            );
+        });
     });
 
     return (
@@ -117,7 +136,9 @@ const ObjectiveForm: React.FC<{ id: number }> = ({ id }) => {
             <Tooltip
                 title={
                     hasPermission
-                        ? 'Apri il questionario'
+                        ? !isAnswered
+                            ? 'Apri il questionario'
+                            : "Hai già compilato l'ultimo questionario"
                         : 'Devi accedere oppure richiedere il permesso per compilare il questionario'
                 }
                 placement="bottom-start"
@@ -125,7 +146,7 @@ const ObjectiveForm: React.FC<{ id: number }> = ({ id }) => {
                 <span>
                     <Button
                         variant="contained"
-                        disabled={!hasPermission}
+                        disabled={!hasPermission || isAnswered}
                         onClick={() => setOpen(true)}
                     >
                         COMPILA IL QUESTIONARIO

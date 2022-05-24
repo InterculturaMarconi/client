@@ -16,13 +16,15 @@ const ObjectiveText = React.forwardRef<any, InputProps>(
         return (
             <FormControl error={!!error}>
                 <FormLabel>{title}</FormLabel>
-                <RadioGroup {...register} ref={ref}>
+                <RadioGroup>
                     {values.map((value, index) => (
                         <FormControlLabel
                             key={index}
                             value={index}
                             control={<Radio />}
                             label={value}
+                            {...register}
+                            ref={ref}
                         />
                     ))}
                 </RadioGroup>
