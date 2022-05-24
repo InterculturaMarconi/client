@@ -7,13 +7,15 @@ import {
     styled,
     Fade,
     Backdrop,
-    TextField,
+    Tooltip,
 } from '@mui/material';
 import React from 'react';
 import { useForm, UseFormRegisterReturn } from 'react-hook-form';
 import api from '~/api';
 import ObjectiveText from './ObjectiveText';
 import ObjectiveRadio from './ObjectiveRadio';
+import ObjectiveCheck from './ObjectiveCheck';
+import ObjectiveRange from './ObjectiveRange';
 
 const ModalBox = styled(Box)(({ theme }) => ({
     position: 'absolute',
@@ -30,9 +32,13 @@ interface IQuestion {
     tipo: number;
 }
 
-export type InputProps = IQuestion & UseFormRegisterReturn;
+export type InputProps = IQuestion &
+    UseFormRegisterReturn & {
+        error: any;
+    };
 
 const ObjectiveForm: React.FC<{ id: number }> = ({ id }) => {
+    const [form, setForm] = React.useState(0);
     const [isOpen, setOpen] = React.useState(false);
     const {
         register,
@@ -51,6 +57,8 @@ const ObjectiveForm: React.FC<{ id: number }> = ({ id }) => {
             if (!formData.success) {
                 return;
             }
+
+            setForm(formData.data.id);
 
             const res = await api.get(`/form/${formData.data.id}/questions`);
             const { data, success } = await res.json();
@@ -81,7 +89,18 @@ const ObjectiveForm: React.FC<{ id: number }> = ({ id }) => {
         fetch();
     }, []);
 
-    const onSubmit = handleSubmit(() => {});
+    const onSubmit = handleSubmit(data => {
+        // Object.keys(data).forEach(async key => {
+        // const res = await api.post(
+        // `/answer`,
+        // JSON.stringify({
+        // id_form: form,
+        // id_domanda: Number.parseInt(key),
+        // testo: data[key],
+        // }),
+        // );
+        // });
+    });
 
     return (
         <Box
@@ -95,9 +114,24 @@ const ObjectiveForm: React.FC<{ id: number }> = ({ id }) => {
             }}
         >
             <Typography variant="h4">Pronto a farci sapere la tua?</Typography>
-            <Button variant="contained" disabled={!hasPermission} onClick={() => setOpen(true)}>
-                COMPILA IL QUESTIONARIO
-            </Button>
+            <Tooltip
+                title={
+                    hasPermission
+                        ? 'Apri il questionario'
+                        : 'Devi accedere oppure richiedere il permesso per compilare il questionario'
+                }
+                placement="bottom-start"
+            >
+                <span>
+                    <Button
+                        variant="contained"
+                        disabled={!hasPermission}
+                        onClick={() => setOpen(true)}
+                    >
+                        COMPILA IL QUESTIONARIO
+                    </Button>
+                </span>
+            </Tooltip>
             <Modal
                 open={isOpen}
                 onClose={() => setOpen(false)}
@@ -113,7 +147,7 @@ const ObjectiveForm: React.FC<{ id: number }> = ({ id }) => {
                             <Box
                                 component="form"
                                 sx={{
-                                    width: { xs: '90vw', md: '75vw', lg: '50vw' },
+                                    width: { xs: '90vw', md: '80vw', lg: '60vw' },
                                     display: 'flex',
                                     gap: 2,
                                     flexDirection: 'column',
@@ -121,12 +155,32 @@ const ObjectiveForm: React.FC<{ id: number }> = ({ id }) => {
                                 onSubmit={onSubmit}
                             >
                                 {questions.map(btn => (
-                                    <Box key={btn.id}>
-                                        {btn.tipo === 1 ? (
-                                            <ObjectiveText {...btn} {...register('')} />
-                                        ) : (
-                                            <ObjectiveRadio {...btn} {...register('')} />
-                                        )}
+                                    <Box key={btn.id} sx={{ mb: 3 }}>
+                                        {btn.tipo == 1 ? (
+                                            <ObjectiveText
+                                                error={errors[`${btn.id}`]}
+                                                {...btn}
+                                                {...register(`${btn.id}`, { required: true })}
+                                            />
+                                        ) : btn.tipo == 2 ? (
+                                            <ObjectiveRadio
+                                                error={errors[`${btn.id}`]}
+                                                {...btn}
+                                                {...register(`${btn.id}`, { required: true })}
+                                            />
+                                        ) : btn.tipo == 3 ? (
+                                            <ObjectiveCheck
+                                                error={errors[`${btn.id}`]}
+                                                {...btn}
+                                                {...register(`${btn.id}`, { required: true })}
+                                            />
+                                        ) : btn.tipo == 4 ? (
+                                            <ObjectiveRange
+                                                error={errors[`${btn.id}`]}
+                                                {...btn}
+                                                {...register(`${btn.id}`, { required: true })}
+                                            />
+                                        ) : null}
                                     </Box>
                                 ))}
                                 <Box
@@ -136,7 +190,9 @@ const ObjectiveForm: React.FC<{ id: number }> = ({ id }) => {
                                         justifyContent: 'space-between',
                                     }}
                                 >
-                                    <Button variant="outlined">INVIA</Button>
+                                    <Button variant="outlined" type="submit">
+                                        INVIA
+                                    </Button>
                                     <Button
                                         variant="text"
                                         color="secondary"
