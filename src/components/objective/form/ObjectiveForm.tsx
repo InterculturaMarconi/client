@@ -80,7 +80,7 @@ const ObjectiveForm: React.FC<{ id: number }> = ({ id }) => {
 
             setQuestions(data);
 
-            const roles = await api.get(`/user/${id}/roles`);
+            const roles = await api.get(`/user/${user?.id}/roles`);
             const rolesData = await roles.json();
 
             if (!rolesData.success) {

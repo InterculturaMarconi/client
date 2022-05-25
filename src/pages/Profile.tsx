@@ -14,12 +14,14 @@ import {
     useTheme,
     Typography,
     Modal,
+    Divider,
 } from '@mui/material';
 
 import api from '~/api';
 import Page from '~/components/Page';
 import { useDispatcher, useSelector } from '~/hooks/Store';
 import { getUser, SignOut, Update } from '~/reducers/user';
+import FormViewer from '~/components/form/FormViewer';
 
 const RootDiv = styled('div')(({ theme }) => ({
     padding: theme.spacing(4),
@@ -191,6 +193,8 @@ const Profile: React.FC = () => {
                         </Button>
                     </Box>
                 </Box>
+                <Divider variant="middle" sx={{ mt: 6, mb: 4 }} />
+                <FormViewer />
             </Container>
             <Modal open={open} onClose={() => setOpen(false)}>
                 <Box

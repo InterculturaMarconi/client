@@ -1,8 +1,8 @@
 import React from 'react';
-import Menu from '~/components/menu/Menu';
+import FormViewer from '~/components/form/FormViewer';
 
 const Test: React.FC = () => {
-    return <Menu />;
+    return <FormViewer />;
 };
 
 export default Test;
