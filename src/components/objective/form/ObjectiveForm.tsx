@@ -39,6 +39,13 @@ export type InputProps = IQuestion &
         error: any;
     };
 
+const enum FormType {
+    TEXT = 1,
+    RADIO,
+    CHECK,
+    RANGE,
+}
+
 const ObjectiveForm: React.FC<{ id: number }> = ({ id }) => {
     const [form, setForm] = React.useState(0);
     const [isOpen, setOpen] = React.useState(false);
@@ -177,25 +184,25 @@ const ObjectiveForm: React.FC<{ id: number }> = ({ id }) => {
                             >
                                 {questions.map(btn => (
                                     <Box key={btn.id} sx={{ mb: 3 }}>
-                                        {btn.tipo == 1 ? (
+                                        {btn.tipo == FormType.TEXT ? (
                                             <ObjectiveText
                                                 error={errors[`${btn.id}`]}
                                                 {...btn}
                                                 {...register(`${btn.id}`, { required: true })}
                                             />
-                                        ) : btn.tipo == 2 ? (
+                                        ) : btn.tipo == FormType.RADIO ? (
                                             <ObjectiveRadio
                                                 error={errors[`${btn.id}`]}
                                                 {...btn}
                                                 {...register(`${btn.id}`, { required: true })}
                                             />
-                                        ) : btn.tipo == 3 ? (
+                                        ) : btn.tipo == FormType.CHECK ? (
                                             <ObjectiveCheck
                                                 error={errors[`${btn.id}`]}
                                                 {...btn}
                                                 {...register(`${btn.id}`, { required: true })}
                                             />
-                                        ) : btn.tipo == 4 ? (
+                                        ) : btn.tipo == FormType.RANGE ? (
                                             <ObjectiveRange
                                                 error={errors[`${btn.id}`]}
                                                 {...btn}

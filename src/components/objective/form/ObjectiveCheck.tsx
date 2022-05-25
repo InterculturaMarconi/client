@@ -9,13 +9,15 @@ const ObjectiveCheck = React.forwardRef<unknown, InputProps>(
         return (
             <FormControl error={!!error}>
                 <FormLabel>{title}</FormLabel>
-                <FormGroup {...register} ref={ref}>
+                <FormGroup>
                     {values.map((value, index) => (
                         <FormControlLabel
                             key={index}
                             value={index}
                             control={<Checkbox />}
                             label={value}
+                            {...register}
+                            ref={ref}
                         />
                     ))}
                 </FormGroup>
