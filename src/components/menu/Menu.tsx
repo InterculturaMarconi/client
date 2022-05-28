@@ -28,9 +28,9 @@ interface IPage {
 }
 
 const pages: Array<IPage> = [
-    { name: 'Products', path: '/products' },
-    { name: 'Pricing', path: '/pricing' },
-    { name: 'Blog', path: '/blog' },
+    { name: 'Crediti', path: '/credits' },
+    // { name: 'Pricing', path: '/pricing' },
+    // { name: 'Blog', path: '/blog' },
 ];
 
 const StyledLink = styled(Link)(({ theme }) => ({

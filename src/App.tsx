@@ -6,6 +6,7 @@ import Home from '~/pages/Home';
 import Login from '~/pages/Login';
 import Profile from '~/pages/Profile';
 import Register from '~/pages/Register';
+import Credits from '~/pages/Credits';
 import Obiettivo1 from '~/pages/obiettivo/Obiettivo1';
 import Obiettivo2 from './pages/obiettivo/Obiettivo2';
 import Obiettivo6 from './pages/obiettivo/Obiettivo6';
@@ -33,6 +34,7 @@ const App: React.FC = () => {
                 <Route index element={<Home />} />
                 <Route path="login" element={<Login />} />
                 <Route path="register" element={<Register />} />
+                <Route path="credits" element={<Credits />} />
                 <Route
                     path="profile"
                     element={

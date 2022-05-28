@@ -33,9 +33,9 @@ const StyledImg = styled('img')(({ theme }) => ({
 
 const pages = [
     { page: 'Home', link: '/' },
-    { page: 'Products', link: '/products' },
-    { page: 'Pricing', link: '/pricing' },
-    { page: 'Blog', link: '/blog' },
+    { page: 'Crediti', link: '/credits' },
+    // { page: 'Pricing', link: '/pricing' },
+    // { page: 'Blog', link: '/blog' },
 ];
 
 const Footer: React.FC<{ color?: string }> = ({ color }) => {
