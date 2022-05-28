@@ -13,6 +13,7 @@ import Obiettivo3 from './pages/obiettivo/Obiettivo3';
 import Obiettivo6 from './pages/obiettivo/Obiettivo6';
 import Obiettivo14 from '~/pages/obiettivo/Obiettivo14';
 import Obiettivo15 from '~/pages/obiettivo/Obiettivo15';
+import ObjectiveNotFound from '~/pages/obiettivo/ObjectiveNotFound';
 
 import PrivateRoute from '~/components/PrivateRoute';
 
@@ -48,20 +49,20 @@ const App: React.FC = () => {
                     <Route path="1" element={<Obiettivo1 />} />
                     <Route path="2" element={<Obiettivo2 />} />
                     <Route path="3" element={<Obiettivo3 />} />
-                    <Route path="4" element={<Obiettivo1 />} />
-                    <Route path="5" element={<Obiettivo1 />} />
+                    <Route path="4" element={<ObjectiveNotFound />} />
+                    <Route path="5" element={<ObjectiveNotFound />} />
                     <Route path="6" element={<Obiettivo6 />} />
-                    <Route path="7" element={<Obiettivo1 />} />
-                    <Route path="8" element={<Obiettivo1 />} />
-                    <Route path="9" element={<Obiettivo1 />} />
-                    <Route path="10" element={<Obiettivo1 />} />
-                    <Route path="11" element={<Obiettivo1 />} />
-                    <Route path="12" element={<Obiettivo1 />} />
-                    <Route path="13" element={<Obiettivo1 />} />
+                    <Route path="7" element={<ObjectiveNotFound />} />
+                    <Route path="8" element={<ObjectiveNotFound />} />
+                    <Route path="9" element={<ObjectiveNotFound />} />
+                    <Route path="10" element={<ObjectiveNotFound />} />
+                    <Route path="11" element={<ObjectiveNotFound />} />
+                    <Route path="12" element={<ObjectiveNotFound />} />
+                    <Route path="13" element={<ObjectiveNotFound />} />
                     <Route path="14" element={<Obiettivo14 />} />
                     <Route path="15" element={<Obiettivo15 />} />
-                    <Route path="16" element={<Obiettivo1 />} />
-                    <Route path="17" element={<Obiettivo1 />} />
+                    <Route path="16" element={<ObjectiveNotFound />} />
+                    <Route path="17" element={<ObjectiveNotFound />} />
                 </Route>
                 <Route path="test" element={<Test />} />
             </Route>
