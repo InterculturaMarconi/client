@@ -2,10 +2,10 @@ import * as React from 'react';
 import { CardContent, Card, CardMedia, Grid } from '@mui/material';
 
 export interface IObjectiveGrid {
-    img1: String;
-    img2: String;
-    img3: String;
-    img4: String;
+    img1: string;
+    img2: string;
+    img3: string;
+    img4: string;
     text1: React.ReactNode;
     text2: React.ReactNode;
     text3: React.ReactNode;

@@ -66,7 +66,7 @@ const SignUp = createAsyncThunk('user/register', async (payload: IRegister, thun
     return thunkApi.rejectWithValue(error);
 });
 
-const Fetch = createAsyncThunk<IUser, void, { state: IUserState; rejectValue: UserError }>(
+const Fetch = createAsyncThunk(
     'user/fetch',
     async (_, thunkApi) => {
         const res = await api.get('/user');
@@ -78,7 +78,7 @@ const Fetch = createAsyncThunk<IUser, void, { state: IUserState; rejectValue: Us
 
         return thunkApi.rejectWithValue(UserError.UNKNOWN_USER);
     },
-    { condition: (_, { getState }) => getState().user !== null },
+    { condition: (_, { getState }) => (getState() as IUserState).user !== null },
 );
 
 interface IUserUpdate {
