@@ -9,6 +9,7 @@ import Register from '~/pages/Register';
 import Credits from '~/pages/Credits';
 import Obiettivo1 from '~/pages/obiettivo/Obiettivo1';
 import Obiettivo2 from './pages/obiettivo/Obiettivo2';
+import Obiettivo3 from './pages/obiettivo/Obiettivo3';
 import Obiettivo6 from './pages/obiettivo/Obiettivo6';
 import Obiettivo14 from '~/pages/obiettivo/Obiettivo14';
 import Obiettivo15 from '~/pages/obiettivo/Obiettivo15';
@@ -46,7 +47,7 @@ const App: React.FC = () => {
                 <Route path="obiettivo">
                     <Route path="1" element={<Obiettivo1 />} />
                     <Route path="2" element={<Obiettivo2 />} />
-                    <Route path="3" element={<Obiettivo1 />} />
+                    <Route path="3" element={<Obiettivo3 />} />
                     <Route path="4" element={<Obiettivo1 />} />
                     <Route path="5" element={<Obiettivo1 />} />
                     <Route path="6" element={<Obiettivo6 />} />
