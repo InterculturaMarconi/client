@@ -10,12 +10,6 @@ interface IPage {
     navcolor?: string;
     footcolor?: string;
 }
-
-const Main = styled('main')<{ background?: string }>(({ background, theme }) => ({
-    flexGrow: 1,
-    backgroundColor: background && theme.palette.mode === 'light' ? background : 'inherit',
-}));
-
 const Page: React.FC<IPage> = ({ children, title, background, navcolor, footcolor }) => {
     const theme = useTheme();
 
@@ -31,9 +25,7 @@ const Page: React.FC<IPage> = ({ children, title, background, navcolor, footcolo
     return (
         <>
             <Menu color={navcolor} />
-            {/* <Main background={background}> */}
             {children}
-            {/*</Main>*/}
             <Footer color={footcolor} />
         </>
     );

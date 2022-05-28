@@ -1,7 +1,6 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 
-import Test from '~/pages/Test';
 import Home from '~/pages/Home';
 import Login from '~/pages/Login';
 import Profile from '~/pages/Profile';
@@ -49,22 +48,11 @@ const App: React.FC = () => {
                     <Route path="1" element={<Obiettivo1 />} />
                     <Route path="2" element={<Obiettivo2 />} />
                     <Route path="3" element={<Obiettivo3 />} />
-                    <Route path="4" element={<ObjectiveNotFound />} />
-                    <Route path="5" element={<ObjectiveNotFound />} />
                     <Route path="6" element={<Obiettivo6 />} />
-                    <Route path="7" element={<ObjectiveNotFound />} />
-                    <Route path="8" element={<ObjectiveNotFound />} />
-                    <Route path="9" element={<ObjectiveNotFound />} />
-                    <Route path="10" element={<ObjectiveNotFound />} />
-                    <Route path="11" element={<ObjectiveNotFound />} />
-                    <Route path="12" element={<ObjectiveNotFound />} />
-                    <Route path="13" element={<ObjectiveNotFound />} />
                     <Route path="14" element={<Obiettivo14 />} />
                     <Route path="15" element={<Obiettivo15 />} />
-                    <Route path="16" element={<ObjectiveNotFound />} />
-                    <Route path="17" element={<ObjectiveNotFound />} />
+                    <Route path="*" element={<ObjectiveNotFound />} />
                 </Route>
-                <Route path="test" element={<Test />} />
             </Route>
         </Routes>
     );

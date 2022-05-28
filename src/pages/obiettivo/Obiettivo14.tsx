@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactPlayer from 'react-player';
 import { Box } from '@mui/system';
 
 import Page from '~/components/Page';
