@@ -1,4 +1,4 @@
-import { Avatar, IconButton, styled, Tooltip } from '@mui/material';
+import { Avatar, styled, Tooltip } from '@mui/material';
 import React from 'react';
 import { Link } from 'react-router-dom';
 
@@ -19,16 +19,25 @@ const StyledLink = styled(Link)(({ theme }) => ({
     },
 }));
 
+const IconButton = styled(Link)(({ theme }) => ({
+    p: '0',
+    ...theme.components?.MuiIconButton,
+}));
+
 const MenuAccountButton: React.FC = () => {
     const userState = useSelector(getUser);
 
     if (!userState.user) {
-        return <StyledLink to="/login">ACCEDI</StyledLink>;
+        return (
+            <StyledLink to="/login" reloadDocument>
+                ACCEDI
+            </StyledLink>
+        );
     }
 
     return (
         <Tooltip title="Vai al profilo">
-            <IconButton component="a" href="/profile" sx={{ p: 0 }}>
+            <IconButton to="/profile" reloadDocument>
                 <Avatar
                     alt={`${userState.user.nome} ${userState.user.cognome}`}
                     src={`${!userState.user?.img ? '/avatar.png' : `${userState.user?.img}`}`}
