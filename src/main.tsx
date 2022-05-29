@@ -18,6 +18,5 @@ root.render(
                 </PaletteModeProvider>
             </HashRouter>
         </Provider>
-        ,
     </React.StrictMode>,
 );
